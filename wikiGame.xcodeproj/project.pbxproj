@@ -18,6 +18,7 @@
 		FC1E8D2020FF856200640AB1 /* wikiGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E8D1F20FF856200640AB1 /* wikiGameTests.swift */; };
 		FC1E8D2B20FF856200640AB1 /* wikiGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E8D2A20FF856200640AB1 /* wikiGameUITests.swift */; };
 		FC1E8D4A20FF87E000640AB1 /* WikipediaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1E8D4320FF86DE00640AB1 /* WikipediaKit.framework */; };
+		FC1F87742102542C007739C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1F87732102542C007739C4 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,33 +36,12 @@
 			remoteGlobalIDString = FC1E8D0620FF856100640AB1;
 			remoteInfo = wikiGame;
 		};
-		FC1E8D4020FF86DE00640AB1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC1E8D3820FF86DE00640AB1 /* WikipediaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 27E365081E81757500F39F78;
-			remoteInfo = "WikipediaKit-macOS";
-		};
 		FC1E8D4220FF86DE00640AB1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC1E8D3820FF86DE00640AB1 /* WikipediaKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 27E365471E81AC6A00F39F78;
 			remoteInfo = "WikipediaKit-iOS";
-		};
-		FC1E8D4420FF86DE00640AB1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC1E8D3820FF86DE00640AB1 /* WikipediaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 27E3658A1E81C95D00F39F78;
-			remoteInfo = "WikipediaKit-watchOS";
-		};
-		FC1E8D4620FF86DE00640AB1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FC1E8D3820FF86DE00640AB1 /* WikipediaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 27E365AC1E81C9E300F39F78;
-			remoteInfo = "WikipediaKit-tvOS";
 		};
 		FC1E8D4820FF86DE00640AB1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -96,6 +76,7 @@
 		FC1E8D2A20FF856200640AB1 /* wikiGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wikiGameUITests.swift; sourceTree = "<group>"; };
 		FC1E8D2C20FF856200640AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC1E8D3820FF86DE00640AB1 /* WikipediaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WikipediaKit.xcodeproj; path = "WikipediaKit-master/WikipediaKit.xcodeproj"; sourceTree = "<group>"; };
+		FC1F87732102542C007739C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +159,7 @@
 			children = (
 				FC1E8D0A20FF856100640AB1 /* AppDelegate.swift */,
 				FC1E8D0C20FF856100640AB1 /* ViewController.swift */,
+				FC1F87732102542C007739C4 /* Constants.swift */,
 				FC1E8D0E20FF856100640AB1 /* Main.storyboard */,
 				FC1E8D1120FF856200640AB1 /* Assets.xcassets */,
 				FC1E8D1320FF856200640AB1 /* LaunchScreen.storyboard */,
@@ -207,10 +189,7 @@
 		FC1E8D3920FF86DE00640AB1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC1E8D4120FF86DE00640AB1 /* WikipediaKit.framework */,
 				FC1E8D4320FF86DE00640AB1 /* WikipediaKit.framework */,
-				FC1E8D4520FF86DE00640AB1 /* WikipediaKit.framework */,
-				FC1E8D4720FF86DE00640AB1 /* WikipediaKit.framework */,
 				FC1E8D4920FF86DE00640AB1 /* WikipediaKitTests.xctest */,
 			);
 			name = Products;
@@ -227,6 +206,7 @@
 				FC1E8D0320FF856100640AB1 /* Sources */,
 				FC1E8D0420FF856100640AB1 /* Frameworks */,
 				FC1E8D0520FF856100640AB1 /* Resources */,
+				083AC6624497D0F51B5A9712 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -325,32 +305,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		FC1E8D4120FF86DE00640AB1 /* WikipediaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WikipediaKit.framework;
-			remoteRef = FC1E8D4020FF86DE00640AB1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		FC1E8D4320FF86DE00640AB1 /* WikipediaKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = WikipediaKit.framework;
 			remoteRef = FC1E8D4220FF86DE00640AB1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		FC1E8D4520FF86DE00640AB1 /* WikipediaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WikipediaKit.framework;
-			remoteRef = FC1E8D4420FF86DE00640AB1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		FC1E8D4720FF86DE00640AB1 /* WikipediaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WikipediaKit.framework;
-			remoteRef = FC1E8D4620FF86DE00640AB1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		FC1E8D4920FF86DE00640AB1 /* WikipediaKitTests.xctest */ = {
@@ -390,6 +349,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		083AC6624497D0F51B5A9712 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-wikiGame/Pods-wikiGame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-wikiGame/Pods-wikiGame-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		18AB7925E4244245AD2AC1E9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,6 +430,7 @@
 			files = (
 				FC1E8D0D20FF856100640AB1 /* ViewController.swift in Sources */,
 				FC1E8D0B20FF856100640AB1 /* AppDelegate.swift in Sources */,
+				FC1F87742102542C007739C4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,10 +606,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = wikiGame/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.wikiGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -646,10 +621,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = wikiGame/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.wikiGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -665,11 +637,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = wikiGameTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.wikiGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -686,11 +654,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = wikiGameTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.wikiGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -706,11 +670,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = wikiGameUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.wikiGameUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -726,11 +686,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = wikiGameUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.wikiGameUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
