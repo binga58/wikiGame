@@ -16,5 +16,15 @@ struct Constants {
     
     static let defaultArticle = "Cristiano Ronaldo"
     
+    static let excludingTitles: Set<String> = Set(["External links",
+                                                   "Bibliography",
+                                                   "Further reading",
+                                                   "Notes",
+                                                   "See also",
+                                                   "References",
+                                                   "Footnotes"])
+    
+    static let totalCharactersCount = 100
+    
 }
 

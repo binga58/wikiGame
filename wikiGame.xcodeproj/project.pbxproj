@@ -14,8 +14,6 @@
 		FC1E6A8621046105002E9300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6D21046105002E9300 /* Main.storyboard */; };
 		FC1E6A8821046105002E9300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A7121046105002E9300 /* Assets.xcassets */; };
 		FC1E6A8921046105002E9300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A7721046105002E9300 /* ViewController.swift */; };
-		FC1E6A8A21046105002E9300 /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A7A21046105002E9300 /* ParagraphTableViewCell.swift */; };
-		FC1E6A8B21046105002E9300 /* ParagraphTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A7B21046105002E9300 /* ParagraphTableViewCell.xib */; };
 		FC1E6A8C21046105002E9300 /* HeaderImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A7D21046105002E9300 /* HeaderImageTableViewCell.xib */; };
 		FC1E6A8D21046105002E9300 /* HeaderImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A7E21046105002E9300 /* HeaderImageTableViewCell.swift */; };
 		FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A8021046105002E9300 /* IntroParaTableViewCell.swift */; };
@@ -26,6 +24,17 @@
 		FC1E6A952104621B002E9300 /* ArticleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A942104621B002E9300 /* ArticleParser.swift */; };
 		FC1E6A9721046233002E9300 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A9621046233002E9300 /* Constants.swift */; };
 		FC1E6A992104623A002E9300 /* NSObject_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A982104623A002E9300 /* NSObject_Extension.swift */; };
+		FC1E6A9D210481BE002E9300 /* ParagraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A9B210481BE002E9300 /* ParagraphTableViewCell.swift */; };
+		FC1E6A9E210481BE002E9300 /* ParagraphTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A9C210481BE002E9300 /* ParagraphTableViewCell.xib */; };
+		FC1E6AA821048D68002E9300 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A9F21048D67002E9300 /* SF-UI-Display-Regular.otf */; };
+		FC1E6AA921048D68002E9300 /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA021048D67002E9300 /* SF-UI-Display-Black.otf */; };
+		FC1E6AAA21048D68002E9300 /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA121048D68002E9300 /* SF-UI-Display-Bold.otf */; };
+		FC1E6AAB21048D68002E9300 /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA221048D68002E9300 /* SF-UI-Display-Heavy.otf */; };
+		FC1E6AAC21048D68002E9300 /* SF-UI-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA321048D68002E9300 /* SF-UI-Display-Medium.otf */; };
+		FC1E6AAD21048D68002E9300 /* SF-UI-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA421048D68002E9300 /* SF-UI-Display-Light.otf */; };
+		FC1E6AAE21048D68002E9300 /* SF-UI-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA521048D68002E9300 /* SF-UI-Display-Semibold.otf */; };
+		FC1E6AAF21048D68002E9300 /* SF-UI-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA621048D68002E9300 /* SF-UI-Display-Thin.otf */; };
+		FC1E6AB021048D68002E9300 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA721048D68002E9300 /* SF-UI-Display-Ultralight.otf */; };
 		FC1E8D2020FF856200640AB1 /* wikiGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E8D1F20FF856200640AB1 /* wikiGameTests.swift */; };
 		FC1E8D2B20FF856200640AB1 /* wikiGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E8D2A20FF856200640AB1 /* wikiGameUITests.swift */; };
 		FC1E8D4A20FF87E000640AB1 /* WikipediaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1E8D4320FF86DE00640AB1 /* WikipediaKit.framework */; };
@@ -76,8 +85,6 @@
 		FC1E6A6D21046105002E9300 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FC1E6A7121046105002E9300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC1E6A7721046105002E9300 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FC1E6A7A21046105002E9300 /* ParagraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphTableViewCell.swift; sourceTree = "<group>"; };
-		FC1E6A7B21046105002E9300 /* ParagraphTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphTableViewCell.xib; sourceTree = "<group>"; };
 		FC1E6A7D21046105002E9300 /* HeaderImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderImageTableViewCell.xib; sourceTree = "<group>"; };
 		FC1E6A7E21046105002E9300 /* HeaderImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderImageTableViewCell.swift; sourceTree = "<group>"; };
 		FC1E6A8021046105002E9300 /* IntroParaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroParaTableViewCell.swift; sourceTree = "<group>"; };
@@ -88,6 +95,17 @@
 		FC1E6A942104621B002E9300 /* ArticleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleParser.swift; sourceTree = "<group>"; };
 		FC1E6A9621046233002E9300 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FC1E6A982104623A002E9300 /* NSObject_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject_Extension.swift; sourceTree = "<group>"; };
+		FC1E6A9B210481BE002E9300 /* ParagraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphTableViewCell.swift; sourceTree = "<group>"; };
+		FC1E6A9C210481BE002E9300 /* ParagraphTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphTableViewCell.xib; sourceTree = "<group>"; };
+		FC1E6A9F21048D67002E9300 /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
+		FC1E6AA021048D67002E9300 /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
+		FC1E6AA121048D68002E9300 /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
+		FC1E6AA221048D68002E9300 /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
+		FC1E6AA321048D68002E9300 /* SF-UI-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Medium.otf"; sourceTree = "<group>"; };
+		FC1E6AA421048D68002E9300 /* SF-UI-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Light.otf"; sourceTree = "<group>"; };
+		FC1E6AA521048D68002E9300 /* SF-UI-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Semibold.otf"; sourceTree = "<group>"; };
+		FC1E6AA621048D68002E9300 /* SF-UI-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Thin.otf"; sourceTree = "<group>"; };
+		FC1E6AA721048D68002E9300 /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		FC1E8D0720FF856100640AB1 /* wikiGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wikiGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1E8D1B20FF856200640AB1 /* wikiGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wikiGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1E8D1F20FF856200640AB1 /* wikiGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wikiGameTests.swift; sourceTree = "<group>"; };
@@ -185,6 +203,15 @@
 		FC1E6A7021046105002E9300 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FC1E6AA021048D67002E9300 /* SF-UI-Display-Black.otf */,
+				FC1E6AA121048D68002E9300 /* SF-UI-Display-Bold.otf */,
+				FC1E6AA221048D68002E9300 /* SF-UI-Display-Heavy.otf */,
+				FC1E6AA421048D68002E9300 /* SF-UI-Display-Light.otf */,
+				FC1E6AA321048D68002E9300 /* SF-UI-Display-Medium.otf */,
+				FC1E6A9F21048D67002E9300 /* SF-UI-Display-Regular.otf */,
+				FC1E6AA521048D68002E9300 /* SF-UI-Display-Semibold.otf */,
+				FC1E6AA621048D68002E9300 /* SF-UI-Display-Thin.otf */,
+				FC1E6AA721048D68002E9300 /* SF-UI-Display-Ultralight.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -235,20 +262,11 @@
 		FC1E6A7821046105002E9300 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				FC1E6A7921046105002E9300 /* Paragraph */,
+				FC1E6A9A210481BE002E9300 /* Paragraph */,
 				FC1E6A7C21046105002E9300 /* HeaderImage */,
 				FC1E6A7F21046105002E9300 /* IntroPara */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		FC1E6A7921046105002E9300 /* Paragraph */ = {
-			isa = PBXGroup;
-			children = (
-				FC1E6A7A21046105002E9300 /* ParagraphTableViewCell.swift */,
-				FC1E6A7B21046105002E9300 /* ParagraphTableViewCell.xib */,
-			);
-			path = Paragraph;
 			sourceTree = "<group>";
 		};
 		FC1E6A7C21046105002E9300 /* HeaderImage */ = {
@@ -275,6 +293,15 @@
 				FC1E6A8321046105002E9300 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		FC1E6A9A210481BE002E9300 /* Paragraph */ = {
+			isa = PBXGroup;
+			children = (
+				FC1E6A9B210481BE002E9300 /* ParagraphTableViewCell.swift */,
+				FC1E6A9C210481BE002E9300 /* ParagraphTableViewCell.xib */,
+			);
+			path = Paragraph;
 			sourceTree = "<group>";
 		};
 		FC1E8CFE20FF856100640AB1 = {
@@ -458,13 +485,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1E6AAE21048D68002E9300 /* SF-UI-Display-Semibold.otf in Resources */,
+				FC1E6AAD21048D68002E9300 /* SF-UI-Display-Light.otf in Resources */,
+				FC1E6AAC21048D68002E9300 /* SF-UI-Display-Medium.otf in Resources */,
+				FC1E6AA921048D68002E9300 /* SF-UI-Display-Black.otf in Resources */,
+				FC1E6AAF21048D68002E9300 /* SF-UI-Display-Thin.otf in Resources */,
 				FC1E6A9121046105002E9300 /* Info.plist in Resources */,
 				FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */,
+				FC1E6AB021048D68002E9300 /* SF-UI-Display-Ultralight.otf in Resources */,
 				FC1E6A8C21046105002E9300 /* HeaderImageTableViewCell.xib in Resources */,
 				FC1E6A8F21046105002E9300 /* IntroParaTableViewCell.xib in Resources */,
+				FC1E6A9E210481BE002E9300 /* ParagraphTableViewCell.xib in Resources */,
+				FC1E6AAA21048D68002E9300 /* SF-UI-Display-Bold.otf in Resources */,
+				FC1E6AAB21048D68002E9300 /* SF-UI-Display-Heavy.otf in Resources */,
 				FC1E6A8821046105002E9300 /* Assets.xcassets in Resources */,
+				FC1E6AA821048D68002E9300 /* SF-UI-Display-Regular.otf in Resources */,
 				FC1E6A8621046105002E9300 /* Main.storyboard in Resources */,
-				FC1E6A8B21046105002E9300 /* ParagraphTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,9 +603,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC1E6A992104623A002E9300 /* NSObject_Extension.swift in Sources */,
-				FC1E6A8A21046105002E9300 /* ParagraphTableViewCell.swift in Sources */,
 				FC1E6A8921046105002E9300 /* ViewController.swift in Sources */,
 				FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */,
+				FC1E6A9D210481BE002E9300 /* ParagraphTableViewCell.swift in Sources */,
 				FC1E6A9021046105002E9300 /* AppDelegate.swift in Sources */,
 				FC1E6A932104614F002E9300 /* WikiArticle.swift in Sources */,
 				FC1E6A8D21046105002E9300 /* HeaderImageTableViewCell.swift in Sources */,

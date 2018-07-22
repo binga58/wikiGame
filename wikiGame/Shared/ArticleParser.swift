@@ -23,6 +23,7 @@ class ArticleParser: NSObject {
     }
     var imageURL: URL?
     var title: String?
+    var totalString: String = ""
     
     
     func requestWikiArticle(completion: @escaping WikiArticleCompletion) {
@@ -43,6 +44,7 @@ class ArticleParser: NSObject {
             }
             let randomNumber: Int = Int(arc4random_uniform(UInt32(articlePreviews.count - 1)))
             self?.requestArticle(title: articlePreviews[randomNumber].displayTitle)
+//            self?.requestArticle(title: "Skyscraper (2018 film)")
         })
         
     }
@@ -70,7 +72,7 @@ class ArticleParser: NSObject {
     }
     
     private func parseHTML(textArr: [String]) -> Void {
-        
+
         var list: [WikiElements] = []
         
         do {
@@ -79,10 +81,11 @@ class ArticleParser: NSObject {
                 let t1 = text.components(separatedBy: "</h2>")
                 
                 if t1.count == 1{
-                    let doc = try SwiftSoup.parse(t1[0]).text().replacingOccurrences(of: "\\[.*\\]", with: "", options: .regularExpression, range: nil)
+                    let doc = try SwiftSoup.parse(t1[0]).text().replacingOccurrences(of: "\\[\\d+\\]", with: "", options: .regularExpression, range: nil)
                     
                     let title = try SwiftSoup.parse(self.title!).text()
-                    
+                    totalString += doc
+                    self.title = title
                     let wikiElement = WikiElements(with: title, body: doc)
                     
                     list.append(wikiElement)
@@ -93,31 +96,64 @@ class ArticleParser: NSObject {
                     
                     for t in t1{
                         
-                        let doc = try SwiftSoup.parse(t).text().replacingOccurrences(of: "\\[.*\\]", with: "", options: .regularExpression, range: nil)
+                        
+                        
+                        
+                        let doc = try SwiftSoup.parse(t).text()
                         
                         if (header == nil){
-                            header = doc
+                            header = doc.replacingOccurrences(of: "\\[.*\\]", with: "", options: .regularExpression, range: nil)
                         }else if body == nil{
-                            body = doc
+                            let text = doc.replacingOccurrences(of: "\\[\\d+\\]", with: "", options: .regularExpression, range: nil)
+                            body = text
+                            
+                            if text.count < 20{
+                                body = nil
+                            }
+                            
+                            if text.count > 10000{
+                                body = substringToLastFullStop(text1: String(text.prefix(10000)))
+                            }
+                            
+                            totalString += (body ?? "")
+                            
                         }
                         
                     }
                     
-                    if let header = header, let body = body, !header.isEmpty, !body.isEmpty{
+                    if let header = header, let body = body, !header.isEmpty, !body.isEmpty, !Constants.excludingTitles.contains(header){
                         let wikiElement = WikiElements(with: header, body: body)
                         
                         list.append(wikiElement)
                     }
                     
                 }
+                
+                if totalString.count > Constants.totalCharactersCount{
+                    break
+                }
+                
             }
             
+            
+            
             let wikiArticle = WikiArticle(with: title, imageURL: imageURL, wikiElements: list)
+            wikiArticle.totalString = totalString
             self.completion?(wikiArticle,true)
         } catch {
             self.completion?(nil,false)
         }
         
+    }
+    
+    func substringToLastFullStop(text1: String) -> String {
+        var text = text1
+        if let range = text.range(of: ".", options: .backwards, range: nil, locale: nil){
+            
+            text = String(text.prefix(upTo: range.lowerBound)) + "."
+            
+        }
+        return text
     }
     
 

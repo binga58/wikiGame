@@ -25,9 +25,12 @@ class ParagraphTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(wikiElement: WikiElements?) {
+    func configure(wikiElement: WikiElements?, arr: Array<Range<String.Index>>?) {
         self.headerLBL.text = wikiElement?.title
-        self.bodyTextView.text = wikiElement?.body
+        
+        var text = wikiElement?.body
+        
+        self.bodyTextView.text = text
     }
     
 }
