@@ -135,8 +135,6 @@ class ArticleParser: NSObject {
                 
             }
             
-            
-            
             let wikiArticle = WikiArticle(with: title, imageURL: imageURL, wikiElements: list)
             wikiArticle.totalString = totalString
             self.completion?(wikiArticle,true)

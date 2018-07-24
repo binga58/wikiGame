@@ -32,6 +32,7 @@ class WikiArticle: NSObject {
 class WikiElements: NSObject {
     var title: String?
     var body: String?
+    var attributedText: NSAttributedString?
     
     init(with title: String?, body: String?) {
         self.title = title
@@ -43,17 +44,21 @@ class WikiElements: NSObject {
     }
 }
 
-class MissingWords: NSObject {
-    var word: String?
-    var count: Int?
+
+struct Options:Hashable{
+    var index:Int
+    var value:String
     
-    init(with word: String?, count: Int?) {
-        self.word = word
-        self.count = count
+    init(index:Int,value:String) {
+        self.index = index
+        self.value = value
     }
     
-    override var description: String{
-        return "\(String(describing: (self.word ?? "")) ) at \(String(describing: (self.count ?? 0)))"
+    var hashValue: Int {
+        return index.hashValue
     }
     
+    static func == (lhs: Options, rhs: Options) -> Bool {
+        return lhs.index == rhs.index
+    }
 }

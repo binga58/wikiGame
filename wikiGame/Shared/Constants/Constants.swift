@@ -26,5 +26,7 @@ struct Constants {
     
     static let totalCharactersCount = 100
     
+    static let blankString = "__________"
+    
 }
 

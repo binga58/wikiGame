@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol TextfieldURLInteractionDelegate: NSObjectProtocol {
+    func interacted(with url: URL, range: NSRange)
+}
+
 class IntroParaTableViewCell: UITableViewCell {
     @IBOutlet weak var displayTextView: UITextView!
-    
+    weak var delegate: TextfieldURLInteractionDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
+        displayTextView.delegate = self
+        displayTextView.dataDetectorTypes = .link
         // Initialization code
     }
     
@@ -22,19 +28,18 @@ class IntroParaTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(wikiElement: WikiElements?, arr:Array<Range<String.Index>>?) {
-        var text = wikiElement?.body
-        if let rangeArr = arr{
-            
-            for range in rangeArr{
-                
-                text = text?.replacingCharacters(in: range, with: "__________")
-                
-            }
-            
-        }
-        
-        self.displayTextView.text = text
+    func configure(wikiElement: WikiElements?) {
+        displayTextView.delegate = self
+        self.displayTextView.attributedText = wikiElement?.attributedText
+    }
+    
+}
+
+extension IntroParaTableViewCell: UITextViewDelegate{
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        delegate?.interacted(with: URL, range: characterRange)
+        return false
     }
     
 }

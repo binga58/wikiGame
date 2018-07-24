@@ -6,6 +6,7 @@ target 'wikiGame' do
   use_frameworks!
   pod 'SwiftSoup'
   pod 'Kingfisher'
+  pod 'CZPicker'
   # Pods for wikiGame
 
   target 'wikiGameTests' do
