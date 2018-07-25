@@ -48,17 +48,20 @@ class WikiElements: NSObject {
 struct Options:Hashable{
     var index:Int
     var value:String
+    var line:Int
     
-    init(index:Int,value:String) {
+    init(index:Int,value:String,line:Int) {
         self.index = index
         self.value = value
+        self.line = line
     }
     
     var hashValue: Int {
-        return index.hashValue
+        return line.hashValue
     }
     
     static func == (lhs: Options, rhs: Options) -> Bool {
-        return lhs.index == rhs.index
+        return (lhs.line == rhs.line && lhs.index == rhs.index)
     }
+    
 }

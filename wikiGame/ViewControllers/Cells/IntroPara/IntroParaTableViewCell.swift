@@ -37,7 +37,8 @@ class IntroParaTableViewCell: UITableViewCell {
 
 extension IntroParaTableViewCell: UITextViewDelegate{
     
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         delegate?.interacted(with: URL, range: characterRange)
         return false
     }

@@ -43,8 +43,8 @@ class ArticleParser: NSObject {
                 return
             }
             let randomNumber: Int = Int(arc4random_uniform(UInt32(articlePreviews.count - 1)))
-            self?.requestArticle(title: articlePreviews[randomNumber].displayTitle)
-//            self?.requestArticle(title: "Skyscraper (2018 film)")
+//            self?.requestArticle(title: articlePreviews[randomNumber].displayTitle)
+            self?.requestArticle(title: "The Open Championship")
         })
         
     }

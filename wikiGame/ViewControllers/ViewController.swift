@@ -19,10 +19,11 @@ class ViewController: UIViewController {
     var wikiArticle: WikiArticle?
     var articleParser: ArticleParser?
     var replaceStringSet = Set<Options>()
-    var options: [Options] = []
+    var correctOptions: [Options] = []
+    var userSelectedOption: [Options] = []
     
     
-    var currentSelectedIndex: Int = 0
+    var currentSelectedOption: Options?
     
     let picker = CZPickerView(headerTitle: "Options", cancelButtonTitle: "Cancel", confirmButtonTitle: "OK")
     override func viewDidLoad() {
@@ -94,56 +95,138 @@ extension ViewController{
         if let strTest = self.wikiArticle?.elements?.first?.body{
             
             let paraText:NSMutableAttributedString = NSMutableAttributedString.init(string: "")
-            var strArray = strTest.components(separatedBy: " ")
-            let count = UInt32(strArray.count)
+            let strArray = strTest.components(separatedBy: ".")
+            
             let attributes = [NSAttributedStringKey.foregroundColor: UIColor.darkText, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 17.0)!]
             
-            while replaceStringSet.count < 10 {
-                let number = Int(arc4random_uniform(count))
-                if replaceStringSet.insert(Options.init(index: number, value: strArray[number])).inserted{
-                    strArray[number] = Constants.blankString
-                }
+            var randomLineSet: Set<Int> = Set()
+            
+            for i in stride(from: 0, to: 10, by: 1){
+                randomLineSet.insert(i)
             }
             
-            for (index,str) in strArray.enumerated(){
-                paraText.append(NSAttributedString.init(string: str + " "))
-                if replaceStringSet.contains(Options.init(index: index, value: str)){
-                    paraText.addAttribute(.link, value: "\(index)", range: NSRange(location: paraText.length - Constants.blankString.count - 1, length: Constants.blankString.count))
+            for (lineNumber, line) in strArray.enumerated(){
+                
+                
+                if lineNumber < 10 {
+                    
+                    let words = line.trimmingCharacters(in: .whitespaces).components(separatedBy: " ").compactMap { (oldValue) -> String? in
+                        return oldValue.replacingOccurrences(of: " ", with: "")
+                    }
+                    
+                    
+                    let count = UInt32(words.count)
+                    let randomIndex = Int(arc4random_uniform(count))
+                    
+                    let lineTextNSMutableAttributedString = NSMutableAttributedString.init(string: " ")
+                    
+                    for (index, word) in words.enumerated() {
+                        
+                        if word.count > 0{
+                            if index == randomIndex{
+                                
+                                let option = Options(index: index, value: word, line: lineNumber)
+                                
+                                lineTextNSMutableAttributedString.append(NSAttributedString(string: Constants.blankString + (index == words.count - 1 ? "" : " ")))
+                                
+                                lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - Constants.blankString.count - 1, length: Constants.blankString.count))
+                                
+                                correctOptions.append(option)
+                                
+                                
+                                
+                            }else{
+                                
+                                lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
+                                
+                            }
+                        }
+                    }
+                    
+                    paraText.append(lineTextNSMutableAttributedString)
+                    
+                } else{
+                    
+                    paraText.append(NSAttributedString(string: line))
+                    
                 }
+                
+                paraText.append(NSAttributedString(string: "."))
+                
+                
             }
-            options = Array(replaceStringSet)
+            
             paraText.addAttributes(attributes, range: NSMakeRange(0, paraText.length))
             
+            correctOptions.shuffle()
+            
             self.wikiArticle?.elements?.first?.attributedText = paraText
+            
         }
         
     }
     
-    func resetTextView(obj:Options){
+    func resetTextView(option:Options){
         
         if let strTest = self.wikiArticle?.elements?.first?.attributedText?.string{
-        
-        let paraText = NSMutableAttributedString.init(string: "")
-        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.darkText, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 17.0)!]
-            var strArray = strTest.components(separatedBy: " ")
-        
-        for (index,str) in strArray.enumerated(){
-            if index == obj.index{
-                strArray[index] = obj.value
-                paraText.append(NSAttributedString.init(string: obj.value + " "))
-//                if replaceStringSet.contains(Options.init(index: index, value: str)){
-                    paraText.addAttribute(.link, value: "\(index)", range: NSRange(location: paraText.length - obj.value.count - 1,     length: obj.value.count))
-//                }
-            }else{
-                paraText.append(NSAttributedString.init(string: str + " "))
-                if replaceStringSet.contains(Options.init(index: index, value: str)){
-                    paraText.addAttribute(.link, value: "\(index)", range: NSRange(location: paraText.length - str.count - 1 , length: str.count))
-                }
-            }
-        }
-            paraText.addAttributes(attributes, range: NSMakeRange(0, paraText.length))
-        self.wikiArticle?.elements?.first?.attributedText = paraText
             
+            
+            let paraText:NSMutableAttributedString = NSMutableAttributedString.init(string: "")
+            let strArray = strTest.components(separatedBy: ".")
+            
+            let attributes = [NSAttributedStringKey.foregroundColor: UIColor.darkText, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 17.0)!]
+            
+            for (lineNumber, line) in strArray.enumerated(){
+                
+                if lineNumber < 10 {
+                    
+                    let words = line.components(separatedBy: " ")
+                    
+                    let lineTextNSMutableAttributedString = NSMutableAttributedString.init(string: " ")
+                    
+                    for (index, word) in words.enumerated(){
+                        
+                        if correctOptions.contains(Options(index: index, value: word, line: lineNumber)) {
+                            
+                            if index == option.index{
+                                
+                                lineTextNSMutableAttributedString.append(NSAttributedString(string: option.value + (index == words.count - 1 ? "" : " ")))
+                                
+                                lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - option.value.count - 1, length: option.value.count))
+                            }else {
+                                
+                                lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
+                                
+                                lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - word.count - 1, length: word.count))
+                                
+                            }
+                            
+                        }else {
+                            
+                            lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
+                            
+                        }
+                        
+                    }
+                    
+                    paraText.append(lineTextNSMutableAttributedString)
+                    
+                } else{
+                    
+                    paraText.append(NSAttributedString(string: line))
+                    
+                }
+                
+                paraText.append(NSAttributedString(string: "."))
+                
+            }
+            
+            paraText.addAttributes(attributes, range: NSMakeRange(0, paraText.length))
+            if userSelectedOption.contains(option), let index = userSelectedOption.index(of: option){
+                userSelectedOption.remove(at: Int(index))
+            }
+            userSelectedOption.append(option)
+            self.wikiArticle?.elements?.first?.attributedText = paraText
             DispatchQueue.main.async {[weak self] in
                 self?.gameTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             }
@@ -199,7 +282,22 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: TextfieldURLInteractionDelegate{
     func interacted(with url: URL, range: NSRange) {
-        currentSelectedIndex = Int(url.absoluteString)!
+        
+        let indexes = url.absoluteString.components(separatedBy: "-")
+        var lineNumber: Int?
+        var wordIndex: Int?
+        
+        for (i, index) in indexes.enumerated(){
+            if i == 0{
+                lineNumber = Int(index)
+            }else{
+                wordIndex = Int(index)
+            }
+        }
+        
+        if let lineNumber = lineNumber, let wordIndex = wordIndex{
+            currentSelectedOption = Options(index: wordIndex, value: Constants.blankString, line: lineNumber)
+        }
         picker?.show()
     }
     
@@ -207,11 +305,11 @@ extension ViewController: TextfieldURLInteractionDelegate{
 
 extension ViewController: CZPickerViewDataSource{
     func numberOfRows(in pickerView: CZPickerView!) -> Int {
-        return options.count
+        return correctOptions.count
     }
     
     func czpickerView(_ pickerView: CZPickerView!, attributedTitleForRow row: Int) -> NSAttributedString! {
-        return NSAttributedString(string: options[row].value)
+        return NSAttributedString(string: correctOptions[row].value)
     }
     
 }
@@ -219,15 +317,20 @@ extension ViewController: CZPickerViewDataSource{
 extension ViewController: CZPickerViewDelegate{
     
     func czpickerView(_ pickerView: CZPickerView!, didConfirmWithItemAtRow row: Int) {
-        let option = options[row]
+        let option = correctOptions[row]
+        if let lineNumber = currentSelectedOption?.line, let wordIndex = currentSelectedOption?.index{
+            let selectedOption = Options(index: wordIndex, value: option.value, line: lineNumber)
+            self.resetTextView(option: selectedOption)
+        }
         
-        let selectedOption = Options(index: currentSelectedIndex, value: option.value)
         
-        self.resetTextView(obj: selectedOption)
         
     }
     
     
 }
+
+
+
 
 
