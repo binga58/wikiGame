@@ -7,15 +7,13 @@
 //
 
 import Foundation
-import WikipediaKit
 import SwiftSoup
 
-typealias WikiArticleCompletion = (_ article: WikiArticle?, _ isSuccessful: Bool) -> ()
+typealias WikiArticleCompletion = (_ article: WikArt?, _ isSuccessful: Bool) -> ()
 
 class ArticleParser: NSObject {
     
     var completion: WikiArticleCompletion?
-    let language = WikipediaLanguage("en")
     var randomTime: Date{
         let randomNumber: Int = Int(arc4random_uniform(UInt32(240)))
         let date = Date(timeIntervalSinceNow: TimeInterval(-60 * 60 * randomNumber))
@@ -25,123 +23,98 @@ class ArticleParser: NSObject {
     var title: String?
     var totalString: String = ""
     
+    var articleList: [Article] = []
+    
     
     func requestWikiArticle(completion: @escaping WikiArticleCompletion) {
         
-        WikipediaNetworking.appAuthorEmailForAPI = Constants.emailId
         self.completion = completion
         self.searchRandomTitle()
         
     }
     
+    private func mostReadArticleURL() -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        
+        let dateString = dateFormatter.string(from: randomTime)
+        
+        let urlString = "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/" + dateString
+        
+        return urlString
+    }
+    
+    func wikiTitleURL(title: String) -> String {
+        
+        let parameters: [String:String] = [
+            "action": "mobileview",
+            "format": "json",
+            "page": title,
+            "mobileformat": "1",
+            "prop": "id|text|sections|languagecount|displaytitle|description|image|thumb",
+            "sections": "all",
+            "sectionprop": "toclevel|level|line|anchor",
+            "thumbwidth" : "720",
+            "redirect": "yes",
+            "maxage": "7200",
+            "smaxage": "7200",
+            "uselang": "en",
+            ]
+        
+        let url = "https://en.wikipedia.org/w/api.php?" + "\(NetworkClass.stringFromQueryParameters(parameters))"
+        
+        return url
+    }
+    
+    
     private func searchRandomTitle() {
         
-        _ = Wikipedia.shared.requestMostReadArticles(language: language, date: randomTime, completion: {[weak self] (articles, date, language, error) in
+        
+        NetworkClass.sendRequest(url: mostReadArticleURL(),incluedBaseURl: false, requestType: .get, parameters: nil) {[weak self] (status, response, error, statusCode) in
             
-            guard let articlePreviews = articles else{
-                self?.completion?(nil,false)
-                return
-            }
-            let randomNumber: Int = Int(arc4random_uniform(UInt32(articlePreviews.count - 1)))
-//            self?.requestArticle(title: articlePreviews[randomNumber].displayTitle)
-            self?.requestArticle(title: "The Open Championship")
-        })
-        
-    }
-    
-    private func requestArticle(title: String?) -> Void {
-        
-        let language = WikipediaLanguage("en")
-        let _ = Wikipedia.shared.requestArticle(language: language, title: title ?? Constants.defaultArticle , imageWidth: 720) {[weak self] (article, error) in
-            guard error == nil else {
-                self?.completion?(nil,false)
-                return
-            }
-            guard let article = article else {
-                self?.completion?(nil,false)
-                return
+            if status, let result = response as? Dictionary<String,AnyObject>, let items = (result[APIKey.items] as? Array<AnyObject>)?.first as? Dictionary<String,AnyObject>, let articles = items[APIKey.articles] as? Array<Dictionary<String,AnyObject>>{
                 
-            }
-            
-            let text = article.rawText.replacingOccurrences(of: "<table[^>]*?>[\\s\\S]*?</table>", with: "", options: .regularExpression, range: nil).replacingOccurrences(of: "<div class=\"reflist.*\" [^>]*?>[\\s\\S]*?</div>", with: "", options: .regularExpression, range: nil).components(separatedBy: "<h2>")
-            self?.title = article.displayTitle
-            self?.imageURL = article.imageURL
-            self?.parseHTML(textArr: text)
-            print("----------------------\n\n\n")
-        }
-    }
-    
-    private func parseHTML(textArr: [String]) -> Void {
+                self?.articleList = []
+                for articleDict in articles{
+                    
+                    if let name = articleDict[APIKey.article] as? String, let rank = articleDict[APIKey.rank] as? Int, name != APIKey.mainPage, name != APIKey.specialSearch{
+                        let article = Article(name: name, rank: rank)
+                        self?.articleList.append(article)
+                    }
+                    
+                }
+                
+                if let articleParser = self{
+                    let randomIndex = Int(arc4random_uniform(UInt32(articleParser.articleList.count)))
+                    
+                    articleParser.requestArticle(title: articleParser.articleList[randomIndex].name)
+                }
 
-        var list: [WikiElements] = []
+            }
+            
+        }
         
-        do {
-            for text in textArr{
+    }
+    
+    private func requestArticle(title: String) -> Void {
+        
+        NetworkClass.sendRequest(url: wikiTitleURL(title: title), incluedBaseURl: false, requestType: .get, parameters: nil) { (status, response, error, statusCode) in
+            
+            if status {
                 
-                let t1 = text.components(separatedBy: "</h2>")
-                
-                if t1.count == 1{
-                    let doc = try SwiftSoup.parse(t1[0]).text().replacingOccurrences(of: "\\[\\d+\\]", with: "", options: .regularExpression, range: nil)
+                if let result = response as? Dictionary<String,AnyObject>{
                     
-                    let title = try SwiftSoup.parse(self.title!).text()
-                    totalString += doc
-                    self.title = title
-                    let wikiElement = WikiElements(with: title, body: doc)
+                    let wikArt = WikArt(dict: result)
+                    wikArt?.createMissingWords()
+                    self.completion?(wikArt, true)
                     
-                    list.append(wikiElement)
-                }else{
-                    
-                    var header: String?
-                    var body: String?
-                    
-                    for t in t1{
-                        
-                        
-                        
-                        
-                        let doc = try SwiftSoup.parse(t).text()
-                        
-                        if (header == nil){
-                            header = doc.replacingOccurrences(of: "\\[.*\\]", with: "", options: .regularExpression, range: nil)
-                        }else if body == nil{
-                            let text = doc.replacingOccurrences(of: "\\[\\d+\\]", with: "", options: .regularExpression, range: nil)
-                            body = text
-                            
-                            if text.count < 20{
-                                body = nil
-                            }
-                            
-                            if text.count > 10000{
-                                body = substringToLastFullStop(text1: String(text.prefix(10000)))
-                            }
-                            
-                            totalString += (body ?? "")
-                            
-                        }
-                        
-                    }
-                    
-                    if let header = header, let body = body, !header.isEmpty, !body.isEmpty, !Constants.excludingTitles.contains(header){
-                        let wikiElement = WikiElements(with: header, body: body)
-                        
-                        list.append(wikiElement)
-                    }
-                    
-                }
-                
-                if totalString.count > Constants.totalCharactersCount{
-                    break
                 }
                 
             }
             
-            let wikiArticle = WikiArticle(with: title, imageURL: imageURL, wikiElements: list)
-            wikiArticle.totalString = totalString
-            self.completion?(wikiArticle,true)
-        } catch {
-            self.completion?(nil,false)
         }
-        
     }
     
     func substringToLastFullStop(text1: String) -> String {

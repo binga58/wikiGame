@@ -28,9 +28,9 @@ class IntroParaTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(wikiElement: WikiElements?) {
+    func configure(text: NSAttributedString?) {
         displayTextView.delegate = self
-        self.displayTextView.attributedText = wikiElement?.attributedText
+        self.displayTextView.attributedText = text
     }
     
 }

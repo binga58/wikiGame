@@ -8,6 +8,7 @@ target 'wikiGame' do
   pod 'Kingfisher'
   pod 'CZPicker'
   pod 'lottie-ios'
+  pod 'Alamofire'
   # Pods for wikiGame
 
   target 'wikiGameTests' do

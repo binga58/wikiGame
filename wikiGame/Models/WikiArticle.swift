@@ -65,3 +65,13 @@ struct Options:Hashable{
     }
     
 }
+
+struct Article: Codable {
+    var name: String
+    var rank: Int
+    
+    init(name: String, rank: Int) {
+        self.rank = rank
+        self.name = name
+    }
+}

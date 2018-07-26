@@ -28,5 +28,7 @@ struct Constants {
     
     static let blankString = "__________"
     
+    static let minimumLines = 10
+    
 }
 

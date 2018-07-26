@@ -30,7 +30,7 @@ class HeaderImageTableViewCell: UITableViewCell {
         self.displayLBL.text = title
         if let url = imageURL{
             displayImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "wikiLogo"), options: nil, progressBlock: nil) { (image, error, _, url) in
-                print(url)
+                
             }
         }
         
