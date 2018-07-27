@@ -10,6 +10,10 @@
 		34B99ABC951B29E02AA11DFA /* Pods_wikiGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59F63D2E35393F7E7B8C394 /* Pods_wikiGame.framework */; };
 		D40A85E98C299E4C9A857E92 /* Pods_wikiGameTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 592C3AA3C5047C6CF5FFFF69 /* Pods_wikiGameTests.framework */; };
 		DEB9A8F2AB4792A97A86523B /* Pods_wikiGameUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C52E24145D43FB8DDC7BF78 /* Pods_wikiGameUITests.framework */; };
+		FC1B45BA210A2BF400DD6323 /* SF-UI-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1B45B9210A2BF300DD6323 /* SF-UI-Display-Semibold.otf */; };
+		FC1B45BC210A2CE900DD6323 /* LinLibertine_RZ.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1B45BB210A2CE900DD6323 /* LinLibertine_RZ.ttf */; };
+		FC1B45BE210A311500DD6323 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B45BD210A311500DD6323 /* LandingViewController.swift */; };
+		FC1BC678210B69B00079C7FB /* animation-w400-h300.json in Resources */ = {isa = PBXBuildFile; fileRef = FC1BC677210B69AF0079C7FB /* animation-w400-h300.json */; };
 		FC1D4D162108E81300E3FCFA /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */; };
 		FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6C21046105002E9300 /* LaunchScreen.storyboard */; };
 		FC1E6A8621046105002E9300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6D21046105002E9300 /* Main.storyboard */; };
@@ -21,26 +25,18 @@
 		FC1E6A8F21046105002E9300 /* IntroParaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A8121046105002E9300 /* IntroParaTableViewCell.xib */; };
 		FC1E6A9021046105002E9300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A8321046105002E9300 /* AppDelegate.swift */; };
 		FC1E6A9121046105002E9300 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A8421046105002E9300 /* Info.plist */; };
-		FC1E6A932104614F002E9300 /* WikiArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A922104614F002E9300 /* WikiArticle.swift */; };
+		FC1E6A932104614F002E9300 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A922104614F002E9300 /* Option.swift */; };
 		FC1E6A952104621B002E9300 /* ArticleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A942104621B002E9300 /* ArticleParser.swift */; };
 		FC1E6A9721046233002E9300 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A9621046233002E9300 /* Constants.swift */; };
 		FC1E6A992104623A002E9300 /* NSObject_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A982104623A002E9300 /* NSObject_Extension.swift */; };
-		FC1E6AA821048D68002E9300 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A9F21048D67002E9300 /* SF-UI-Display-Regular.otf */; };
-		FC1E6AA921048D68002E9300 /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA021048D67002E9300 /* SF-UI-Display-Black.otf */; };
-		FC1E6AAA21048D68002E9300 /* SF-UI-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA121048D68002E9300 /* SF-UI-Display-Bold.otf */; };
-		FC1E6AAB21048D68002E9300 /* SF-UI-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA221048D68002E9300 /* SF-UI-Display-Heavy.otf */; };
-		FC1E6AAC21048D68002E9300 /* SF-UI-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA321048D68002E9300 /* SF-UI-Display-Medium.otf */; };
 		FC1E6AAD21048D68002E9300 /* SF-UI-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA421048D68002E9300 /* SF-UI-Display-Light.otf */; };
-		FC1E6AAE21048D68002E9300 /* SF-UI-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA521048D68002E9300 /* SF-UI-Display-Semibold.otf */; };
-		FC1E6AAF21048D68002E9300 /* SF-UI-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA621048D68002E9300 /* SF-UI-Display-Thin.otf */; };
-		FC1E6AB021048D68002E9300 /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6AA721048D68002E9300 /* SF-UI-Display-Ultralight.otf */; };
 		FC1E8D2020FF856200640AB1 /* wikiGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E8D1F20FF856200640AB1 /* wikiGameTests.swift */; };
 		FC1E8D2B20FF856200640AB1 /* wikiGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E8D2A20FF856200640AB1 /* wikiGameUITests.swift */; };
 		FC1EF5E82109BEFC000F00B2 /* NetworkClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1EF5E72109BEFC000F00B2 /* NetworkClass.swift */; };
 		FC1EF5EA2109BFC8000F00B2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1EF5E92109BFC8000F00B2 /* Reachability.swift */; };
 		FC34D4E32109CB2400A5E9A1 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E22109CB2400A5E9A1 /* APIKeys.swift */; };
 		FC34D4E72109DAE400A5E9A1 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E62109DAE400A5E9A1 /* StringExtension.swift */; };
-		FC34D4E92109E3D300A5E9A1 /* WikArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E82109E3D300A5E9A1 /* WikArt.swift */; };
+		FC34D4E92109E3D300A5E9A1 /* WikiArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E82109E3D300A5E9A1 /* WikiArticle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +66,10 @@
 		C59F63D2E35393F7E7B8C394 /* Pods_wikiGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wikiGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D325682B821FAB4B50B02F21 /* Pods-wikiGameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wikiGameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wikiGameUITests/Pods-wikiGameUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E58EE92C276AA6A315AFA2FE /* Pods-wikiGameUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wikiGameUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wikiGameUITests/Pods-wikiGameUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FC1B45B9210A2BF300DD6323 /* SF-UI-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Semibold.otf"; sourceTree = "<group>"; };
+		FC1B45BB210A2CE900DD6323 /* LinLibertine_RZ.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LinLibertine_RZ.ttf; sourceTree = "<group>"; };
+		FC1B45BD210A311500DD6323 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		FC1BC677210B69AF0079C7FB /* animation-w400-h300.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w400-h300.json"; sourceTree = "<group>"; };
 		FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtension.swift; sourceTree = "<group>"; };
 		FC1E6A6C21046105002E9300 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC1E6A6D21046105002E9300 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -81,19 +81,11 @@
 		FC1E6A8121046105002E9300 /* IntroParaTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroParaTableViewCell.xib; sourceTree = "<group>"; };
 		FC1E6A8321046105002E9300 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC1E6A8421046105002E9300 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC1E6A922104614F002E9300 /* WikiArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WikiArticle.swift; sourceTree = "<group>"; };
+		FC1E6A922104614F002E9300 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		FC1E6A942104621B002E9300 /* ArticleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleParser.swift; sourceTree = "<group>"; };
 		FC1E6A9621046233002E9300 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FC1E6A982104623A002E9300 /* NSObject_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject_Extension.swift; sourceTree = "<group>"; };
-		FC1E6A9F21048D67002E9300 /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
-		FC1E6AA021048D67002E9300 /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
-		FC1E6AA121048D68002E9300 /* SF-UI-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Bold.otf"; sourceTree = "<group>"; };
-		FC1E6AA221048D68002E9300 /* SF-UI-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Heavy.otf"; sourceTree = "<group>"; };
-		FC1E6AA321048D68002E9300 /* SF-UI-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Medium.otf"; sourceTree = "<group>"; };
 		FC1E6AA421048D68002E9300 /* SF-UI-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Light.otf"; sourceTree = "<group>"; };
-		FC1E6AA521048D68002E9300 /* SF-UI-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Semibold.otf"; sourceTree = "<group>"; };
-		FC1E6AA621048D68002E9300 /* SF-UI-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Thin.otf"; sourceTree = "<group>"; };
-		FC1E6AA721048D68002E9300 /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		FC1E8D0720FF856100640AB1 /* wikiGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wikiGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1E8D1B20FF856200640AB1 /* wikiGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wikiGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1E8D1F20FF856200640AB1 /* wikiGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wikiGameTests.swift; sourceTree = "<group>"; };
@@ -105,7 +97,7 @@
 		FC1EF5E92109BFC8000F00B2 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FC34D4E22109CB2400A5E9A1 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FC34D4E62109DAE400A5E9A1 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		FC34D4E82109E3D300A5E9A1 /* WikArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikArt.swift; sourceTree = "<group>"; };
+		FC34D4E82109E3D300A5E9A1 /* WikiArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +177,7 @@
 		FC1E6A6E21046105002E9300 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC1BC677210B69AF0079C7FB /* animation-w400-h300.json */,
 				FC1E6A7121046105002E9300 /* Assets.xcassets */,
 				FC1E6A7021046105002E9300 /* Fonts */,
 			);
@@ -194,15 +187,9 @@
 		FC1E6A7021046105002E9300 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				FC1E6AA021048D67002E9300 /* SF-UI-Display-Black.otf */,
-				FC1E6AA121048D68002E9300 /* SF-UI-Display-Bold.otf */,
-				FC1E6AA221048D68002E9300 /* SF-UI-Display-Heavy.otf */,
+				FC1B45BB210A2CE900DD6323 /* LinLibertine_RZ.ttf */,
+				FC1B45B9210A2BF300DD6323 /* SF-UI-Display-Semibold.otf */,
 				FC1E6AA421048D68002E9300 /* SF-UI-Display-Light.otf */,
-				FC1E6AA321048D68002E9300 /* SF-UI-Display-Medium.otf */,
-				FC1E6A9F21048D67002E9300 /* SF-UI-Display-Regular.otf */,
-				FC1E6AA521048D68002E9300 /* SF-UI-Display-Semibold.otf */,
-				FC1E6AA621048D68002E9300 /* SF-UI-Display-Thin.otf */,
-				FC1E6AA721048D68002E9300 /* SF-UI-Display-Ultralight.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -239,8 +226,8 @@
 		FC1E6A7521046105002E9300 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FC1E6A922104614F002E9300 /* WikiArticle.swift */,
-				FC34D4E82109E3D300A5E9A1 /* WikArt.swift */,
+				FC1E6A922104614F002E9300 /* Option.swift */,
+				FC34D4E82109E3D300A5E9A1 /* WikiArticle.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,6 +237,7 @@
 			children = (
 				FC1E6A7721046105002E9300 /* ViewController.swift */,
 				FC1E6A7821046105002E9300 /* Cells */,
+				FC1B45BD210A311500DD6323 /* LandingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -447,20 +435,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC1E6AAE21048D68002E9300 /* SF-UI-Display-Semibold.otf in Resources */,
 				FC1E6AAD21048D68002E9300 /* SF-UI-Display-Light.otf in Resources */,
-				FC1E6AAC21048D68002E9300 /* SF-UI-Display-Medium.otf in Resources */,
-				FC1E6AA921048D68002E9300 /* SF-UI-Display-Black.otf in Resources */,
-				FC1E6AAF21048D68002E9300 /* SF-UI-Display-Thin.otf in Resources */,
 				FC1E6A9121046105002E9300 /* Info.plist in Resources */,
 				FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */,
-				FC1E6AB021048D68002E9300 /* SF-UI-Display-Ultralight.otf in Resources */,
 				FC1E6A8C21046105002E9300 /* HeaderImageTableViewCell.xib in Resources */,
+				FC1B45BA210A2BF400DD6323 /* SF-UI-Display-Semibold.otf in Resources */,
 				FC1E6A8F21046105002E9300 /* IntroParaTableViewCell.xib in Resources */,
-				FC1E6AAA21048D68002E9300 /* SF-UI-Display-Bold.otf in Resources */,
-				FC1E6AAB21048D68002E9300 /* SF-UI-Display-Heavy.otf in Resources */,
+				FC1BC678210B69B00079C7FB /* animation-w400-h300.json in Resources */,
 				FC1E6A8821046105002E9300 /* Assets.xcassets in Resources */,
-				FC1E6AA821048D68002E9300 /* SF-UI-Display-Regular.otf in Resources */,
+				FC1B45BC210A2CE900DD6323 /* LinLibertine_RZ.ttf in Resources */,
 				FC1E6A8621046105002E9300 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,11 +560,12 @@
 				FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */,
 				FC34D4E32109CB2400A5E9A1 /* APIKeys.swift in Sources */,
 				FC1E6A9021046105002E9300 /* AppDelegate.swift in Sources */,
-				FC1E6A932104614F002E9300 /* WikiArticle.swift in Sources */,
+				FC1E6A932104614F002E9300 /* Option.swift in Sources */,
 				FC1E6A8D21046105002E9300 /* HeaderImageTableViewCell.swift in Sources */,
 				FC1E6A952104621B002E9300 /* ArticleParser.swift in Sources */,
-				FC34D4E92109E3D300A5E9A1 /* WikArt.swift in Sources */,
+				FC34D4E92109E3D300A5E9A1 /* WikiArticle.swift in Sources */,
 				FC34D4E72109DAE400A5E9A1 /* StringExtension.swift in Sources */,
+				FC1B45BE210A311500DD6323 /* LandingViewController.swift in Sources */,
 				FC1E6A9721046233002E9300 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

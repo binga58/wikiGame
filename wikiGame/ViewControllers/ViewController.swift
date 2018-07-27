@@ -13,8 +13,7 @@ import CZPicker
 class ViewController: UIViewController {
     var heightDict: Dictionary<IndexPath,CGFloat> = [:]
     @IBOutlet weak var gameTableView: UITableView!
-    var wikiArticle: WikArt?
-    var articleParser: ArticleParser?
+    var wikiArticle: WikiArticle?
     
     let picker = CZPickerView(headerTitle: "Options", cancelButtonTitle: "Cancel", confirmButtonTitle: "OK")
     override func viewDidLoad() {
@@ -64,20 +63,20 @@ extension ViewController{
     
     func requestArticle() {
         
-        articleParser = ArticleParser()
         
-        articleParser?.requestWikiArticle {[weak self] (article, isSuccessful) in
+        
+        ArticleParser.shared.requestWikiArticle {[weak self] (article, isSuccessful) in
             if isSuccessful{
                 self?.wikiArticle = article
-                
-//                self?.createMissingWords()
                 
                 DispatchQueue.main.async {
                     self?.gameTableView.reloadData()
                 }
                 
             }else {
-                self?.requestArticle()
+                if NetworkClass.isConnected(){
+                    self?.requestArticle()
+                }
             }
         }
         
@@ -145,7 +144,7 @@ extension ViewController: TextfieldURLInteractionDelegate{
             
             
             if let lineNumber = lineNumber, let wordIndex = wordIndex{
-                wikiArticle?.tempOption = Options(index: wordIndex, value: Constants.blankString, line: lineNumber)
+                wikiArticle?.tempOption = Option(index: wordIndex, value: Constants.blankString, line: lineNumber)
             }
             
             
@@ -180,7 +179,7 @@ extension ViewController: CZPickerViewDelegate{
     func czpickerView(_ pickerView: CZPickerView!, didConfirmWithItemAtRow row: Int) {
         
         if let option = wikiArticle?.correctOptions[row], let lineNumber = wikiArticle?.tempOption?.line, let wordIndex = wikiArticle?.tempOption?.index{
-            let selectedOption = Options(index: wordIndex, value: option.value, line: lineNumber)
+            let selectedOption = Option(index: wordIndex, value: option.value, line: lineNumber)
             wikiArticle?.resetTextView(option: selectedOption)
             
             DispatchQueue.main.async {[weak self] in

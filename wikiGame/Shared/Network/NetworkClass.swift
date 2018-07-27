@@ -15,7 +15,7 @@ let kBaseUrl = ""
 
 typealias CompletionHandler = (_ status:Bool, _ responseObj:Any?,_ error: Error?, _ statusCode:Int?) -> Void
 typealias ProgressHandler = (_ fractionCompleted:Double)-> Void
-typealias JSONDict = [String:AnyObject]
+typealias JSONDictionary = [String:AnyObject]
 
 import Alamofire
 

@@ -9,22 +9,18 @@
 import Foundation
 import SwiftSoup
 
-typealias WikiArticleCompletion = (_ article: WikArt?, _ isSuccessful: Bool) -> ()
+typealias WikiArticleCompletion = (_ article: WikiArticle?, _ isSuccessful: Bool) -> ()
 
 class ArticleParser: NSObject {
     
+    static let shared = ArticleParser()
     var completion: WikiArticleCompletion?
     var randomTime: Date{
         let randomNumber: Int = Int(arc4random_uniform(UInt32(240)))
         let date = Date(timeIntervalSinceNow: TimeInterval(-60 * 60 * randomNumber))
         return date
     }
-    var imageURL: URL?
-    var title: String?
-    var totalString: String = ""
-    
     var articleList: [Article] = []
-    
     
     func requestWikiArticle(completion: @escaping WikiArticleCompletion) {
         
@@ -71,49 +67,64 @@ class ArticleParser: NSObject {
     
     private func searchRandomTitle() {
         
-        
-        NetworkClass.sendRequest(url: mostReadArticleURL(),incluedBaseURl: false, requestType: .get, parameters: nil) {[weak self] (status, response, error, statusCode) in
+        if self.articleList.count > 0{
             
-            if status, let result = response as? Dictionary<String,AnyObject>, let items = (result[APIKey.items] as? Array<AnyObject>)?.first as? Dictionary<String,AnyObject>, let articles = items[APIKey.articles] as? Array<Dictionary<String,AnyObject>>{
+            self.getRandomTitle()
+            
+        } else{
+            
+            NetworkClass.sendRequest(url: mostReadArticleURL(),incluedBaseURl: false, requestType: .get, parameters: nil) {[weak self] (status, response, error, statusCode) in
                 
-                self?.articleList = []
-                for articleDict in articles{
+                if status, let result = response as? Dictionary<String,AnyObject>, let items = (result[APIKey.items] as? Array<AnyObject>)?.first as? Dictionary<String,AnyObject>, let articles = items[APIKey.articles] as? Array<Dictionary<String,AnyObject>>{
                     
-                    if let name = articleDict[APIKey.article] as? String, let rank = articleDict[APIKey.rank] as? Int, name != APIKey.mainPage, name != APIKey.specialSearch{
-                        let article = Article(name: name, rank: rank)
-                        self?.articleList.append(article)
+                    self?.articleList = []
+                    for articleDict in articles{
+                        
+                        if let name = articleDict[APIKey.article] as? String, let rank = articleDict[APIKey.rank] as? Int, name != APIKey.mainPage, name != APIKey.specialSearch{
+                            let article = Article(name: name, rank: rank)
+                            self?.articleList.append(article)
+                        }
+                        
                     }
                     
+                    if (self?.articleList.count ?? 0) > 0 {
+                        self?.getRandomTitle()
+                    } else{
+                        ArticleParser.shared.completion?(nil, false)
+                    }
+                    
+                    
+                }else {
+                    ArticleParser.shared.completion?(nil, false)
                 }
                 
-                if let articleParser = self{
-                    let randomIndex = Int(arc4random_uniform(UInt32(articleParser.articleList.count)))
-                    
-                    articleParser.requestArticle(title: articleParser.articleList[randomIndex].name)
-                }
-
             }
             
         }
+        
+        
+    }
+    
+    func getRandomTitle() {
+        
+        let randomIndex = Int(arc4random_uniform(UInt32(ArticleParser.shared.articleList.count)))
+        
+        ArticleParser.shared.requestArticle(title: ArticleParser.shared.articleList[randomIndex].name)
+        
+        ArticleParser.shared.articleList.remove(at: randomIndex)
         
     }
     
     private func requestArticle(title: String) -> Void {
         
-        NetworkClass.sendRequest(url: wikiTitleURL(title: title), incluedBaseURl: false, requestType: .get, parameters: nil) { (status, response, error, statusCode) in
+        NetworkClass.sendRequest(url: wikiTitleURL(title: title), incluedBaseURl: false, requestType: .get, parameters: nil) { [weak self] (status, response, error, statusCode) in
             
-            if status {
-                
-                if let result = response as? Dictionary<String,AnyObject>{
-                    
-                    let wikArt = WikArt(dict: result)
-                    wikArt?.createMissingWords()
-                    self.completion?(wikArt, true)
-                    
-                }
-                
+            if status, let result = response as? JSONDictionary, let wikArt = WikiArticle(dict: result) {
+                wikArt.createMissingWords()
+                self?.completion?(wikArt, true)
+            }else {
+                self?.completion?(nil, false)
             }
-            
         }
     }
     
