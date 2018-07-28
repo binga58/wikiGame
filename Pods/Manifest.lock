@@ -1,3 +1,32 @@
-PODFILE CHECKSUM: de479d2cdf410871e43da89b64b7c9d63ddb03b7
+PODS:
+  - Alamofire (4.7.2)
+  - CZPicker (0.4.3)
+  - Kingfisher (4.8.0)
+  - lottie-ios (2.5.0)
+  - SwiftSoup (1.7.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - CZPicker
+  - Kingfisher
+  - lottie-ios
+  - SwiftSoup
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - CZPicker
+    - Kingfisher
+    - lottie-ios
+    - SwiftSoup
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  CZPicker: 55aa1751ea26e209814552da1a9a08cba8bbf72a
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
+  SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
+
+PODFILE CHECKSUM: dec2d35d77cfa98066df6e7c8ef6b9c5ca82c6d5
 
 COCOAPODS: 1.5.0
