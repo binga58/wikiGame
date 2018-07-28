@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 
-enum LandingViewState {
+enum ViewState {
     case normal, searching, error
 }
 
@@ -21,7 +21,7 @@ class LandingViewController: UIViewController {
     let animationView: LOTAnimationView = LOTAnimationView(name: "animation-w400-h300.json")
     
     @IBOutlet weak var playBTN: UIButton!
-    var viewState: LandingViewState = .normal{
+    var viewState: ViewState = .normal{
         
         didSet{
             setupView()
@@ -53,9 +53,16 @@ class LandingViewController: UIViewController {
         viewState = .searching
         ArticleParser.shared.requestWikiArticle { (article, success) in
             if success{
-                article?.createMissingWords()
                 DispatchQueue.main.async {[weak self] in
                     self?.viewState = .normal
+                    
+                    let gameViewController = UIStoryboard.init(storyboard: .main).instantiateViewController(withIdentifier: GameViewController.className()) as? GameViewController ?? GameViewController()
+                    gameViewController.wikiArticle = article
+                    let navController = UINavigationController(rootViewController: gameViewController)
+                    
+                    self?.present(navController, animated: true, completion: nil)
+                    
+                    
                 }
             } else {
                 DispatchQueue.main.async {[weak self] in

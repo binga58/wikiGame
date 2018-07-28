@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GameViewController.swift
 //  wikiGame
 //
 //  Created by Abhishek Sharma on 18/07/18.
@@ -10,7 +10,7 @@ import UIKit
 import SwiftSoup
 import CZPicker
 
-class ViewController: UIViewController {
+class GameViewController: UIViewController {
     var heightDict: Dictionary<IndexPath,CGFloat> = [:]
     @IBOutlet weak var gameTableView: UITableView!
     var wikiArticle: WikiArticle?
@@ -19,18 +19,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        requestArticle()
-        
-        
-        picker?.delegate = self
-        picker?.dataSource = self
-        picker?.needFooterView = true
-        
-    }
-    
-    
-    @IBAction func doneAction(_ sender: UIBarButtonItem) {
-
         
     }
     
@@ -42,49 +30,38 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        DispatchQueue.main.async {
+            self.gameTableView.setContentOffset(.zero, animated: false)
+        }
     }
     
 }
 
 //MARK:- UI Helper
-extension ViewController {
+extension GameViewController {
     
     func setupView() {
+        
+        setNavigationBarWithTitle(title: "wiki Game", LeftButtonType: .none, RightButtonType: .done)
         
         gameTableView.register(UINib(nibName: IntroParaTableViewCell.className(), bundle: nil), forCellReuseIdentifier: IntroParaTableViewCell.className())
         
         gameTableView.register(UINib(nibName: HeaderImageTableViewCell.className(), bundle: nil), forCellReuseIdentifier: HeaderImageTableViewCell.className())
         
-    }
-    
-}
-
-extension ViewController{
-    
-    func requestArticle() {
+        picker?.delegate = self
+        picker?.dataSource = self
+        picker?.needFooterView = true
+        picker?.headerBackgroundColor = UIColor.white
+        picker?.headerTitleColor = UIColor.black
+        picker?.confirmButtonBackgroundColor = UIColor.theme
         
-        
-        
-        ArticleParser.shared.requestWikiArticle {[weak self] (article, isSuccessful) in
-            if isSuccessful{
-                self?.wikiArticle = article
-                
-                DispatchQueue.main.async {
-                    self?.gameTableView.reloadData()
-                }
-                
-            }else {
-                if NetworkClass.isConnected(){
-                    self?.requestArticle()
-                }
-            }
-        }
         
     }
     
 }
 
-extension ViewController: UITableViewDataSource {
+extension GameViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let _ = wikiArticle{
             return 2
@@ -118,7 +95,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 
-extension ViewController: UITableViewDelegate {
+extension GameViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -127,7 +104,7 @@ extension ViewController: UITableViewDelegate {
 }
 
 
-extension ViewController: TextfieldURLInteractionDelegate{
+extension GameViewController: TextfieldURLInteractionDelegate{
     func interacted(with url: URL, range: NSRange) {
         let indexes = url.absoluteString.components(separatedBy: "-")
         if indexes.count > 1{
@@ -164,7 +141,7 @@ extension ViewController: TextfieldURLInteractionDelegate{
     
 }
 
-extension ViewController: CZPickerViewDataSource{
+extension GameViewController: CZPickerViewDataSource{
     func numberOfRows(in pickerView: CZPickerView!) -> Int {
         return wikiArticle?.correctOptions.count ?? 0
     }
@@ -174,7 +151,7 @@ extension ViewController: CZPickerViewDataSource{
     }
 }
 
-extension ViewController: CZPickerViewDelegate{
+extension GameViewController: CZPickerViewDelegate{
     
     func czpickerView(_ pickerView: CZPickerView!, didConfirmWithItemAtRow row: Int) {
         
@@ -194,6 +171,28 @@ extension ViewController: CZPickerViewDelegate{
     
 }
 
+extension GameViewController {
+    
+    override func rightButtonAction(sender: UIButton) {
+        
+        let endGameViewController = UIStoryboard(storyboard: .main).instantiateViewController(withIdentifier: EndGameViewController.className()) as? EndGameViewController ?? EndGameViewController()
+        endGameViewController.pointScored = wikiArticle?.findUserScore()
+        endGameViewController.delegate = self
+        self.navigationController?.pushViewController(endGameViewController, animated: true)
+        
+    }
+    
+}
+
+extension GameViewController: RefreshTableContentDelegate{
+    
+    func refresh(article: WikiArticle?) {
+        self.wikiArticle = article
+        self.gameTableView.setContentOffset(.zero, animated: false)
+        self.gameTableView.reloadData()
+    }
+    
+}
 
 
 

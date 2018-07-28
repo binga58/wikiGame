@@ -14,11 +14,14 @@
 		FC1B45BC210A2CE900DD6323 /* LinLibertine_RZ.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1B45BB210A2CE900DD6323 /* LinLibertine_RZ.ttf */; };
 		FC1B45BE210A311500DD6323 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B45BD210A311500DD6323 /* LandingViewController.swift */; };
 		FC1BC678210B69B00079C7FB /* animation-w400-h300.json in Resources */ = {isa = PBXBuildFile; fileRef = FC1BC677210B69AF0079C7FB /* animation-w400-h300.json */; };
+		FC1D0670210B79A500164967 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D066F210B79A500164967 /* UIViewControllerExtension.swift */; };
+		FC1D0672210B7BAA00164967 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0671210B7BAA00164967 /* UIStoryboardExtension.swift */; };
+		FC1D0674210B822700164967 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0673210B822700164967 /* EndGameViewController.swift */; };
 		FC1D4D162108E81300E3FCFA /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */; };
 		FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6C21046105002E9300 /* LaunchScreen.storyboard */; };
 		FC1E6A8621046105002E9300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6D21046105002E9300 /* Main.storyboard */; };
 		FC1E6A8821046105002E9300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A7121046105002E9300 /* Assets.xcassets */; };
-		FC1E6A8921046105002E9300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A7721046105002E9300 /* ViewController.swift */; };
+		FC1E6A8921046105002E9300 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A7721046105002E9300 /* GameViewController.swift */; };
 		FC1E6A8C21046105002E9300 /* HeaderImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A7D21046105002E9300 /* HeaderImageTableViewCell.xib */; };
 		FC1E6A8D21046105002E9300 /* HeaderImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A7E21046105002E9300 /* HeaderImageTableViewCell.swift */; };
 		FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A8021046105002E9300 /* IntroParaTableViewCell.swift */; };
@@ -37,6 +40,7 @@
 		FC34D4E32109CB2400A5E9A1 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E22109CB2400A5E9A1 /* APIKeys.swift */; };
 		FC34D4E72109DAE400A5E9A1 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E62109DAE400A5E9A1 /* StringExtension.swift */; };
 		FC34D4E92109E3D300A5E9A1 /* WikiArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D4E82109E3D300A5E9A1 /* WikiArticle.swift */; };
+		FC6C3008210B896F006CD581 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6C3007210B896F006CD581 /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,11 +74,14 @@
 		FC1B45BB210A2CE900DD6323 /* LinLibertine_RZ.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LinLibertine_RZ.ttf; sourceTree = "<group>"; };
 		FC1B45BD210A311500DD6323 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		FC1BC677210B69AF0079C7FB /* animation-w400-h300.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "animation-w400-h300.json"; sourceTree = "<group>"; };
+		FC1D066F210B79A500164967 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		FC1D0671210B7BAA00164967 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		FC1D0673210B822700164967 /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtension.swift; sourceTree = "<group>"; };
 		FC1E6A6C21046105002E9300 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC1E6A6D21046105002E9300 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FC1E6A7121046105002E9300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FC1E6A7721046105002E9300 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC1E6A7721046105002E9300 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		FC1E6A7D21046105002E9300 /* HeaderImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderImageTableViewCell.xib; sourceTree = "<group>"; };
 		FC1E6A7E21046105002E9300 /* HeaderImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderImageTableViewCell.swift; sourceTree = "<group>"; };
 		FC1E6A8021046105002E9300 /* IntroParaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroParaTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +105,7 @@
 		FC34D4E22109CB2400A5E9A1 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		FC34D4E62109DAE400A5E9A1 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FC34D4E82109E3D300A5E9A1 /* WikiArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiArticle.swift; sourceTree = "<group>"; };
+		FC6C3007210B896F006CD581 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +205,8 @@
 		FC1E6A7221046105002E9300 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				FC1EF5E42109BEEF000F00B2 /* Network */,
 				FC1E6A942104621B002E9300 /* ArticleParser.swift */,
+				FC1EF5E42109BEEF000F00B2 /* Network */,
 				FC1E6A7321046105002E9300 /* Constants */,
 				FC1E6A7421046105002E9300 /* Extensions */,
 			);
@@ -216,6 +224,9 @@
 		FC1E6A7421046105002E9300 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FC6C3007210B896F006CD581 /* UIColorExtension.swift */,
+				FC1D0671210B7BAA00164967 /* UIStoryboardExtension.swift */,
+				FC1D066F210B79A500164967 /* UIViewControllerExtension.swift */,
 				FC1E6A982104623A002E9300 /* NSObject_Extension.swift */,
 				FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */,
 				FC34D4E62109DAE400A5E9A1 /* StringExtension.swift */,
@@ -235,9 +246,10 @@
 		FC1E6A7621046105002E9300 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC1E6A7721046105002E9300 /* ViewController.swift */,
-				FC1E6A7821046105002E9300 /* Cells */,
 				FC1B45BD210A311500DD6323 /* LandingViewController.swift */,
+				FC1E6A7721046105002E9300 /* GameViewController.swift */,
+				FC1D0673210B822700164967 /* EndGameViewController.swift */,
+				FC1E6A7821046105002E9300 /* Cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -555,16 +567,20 @@
 				FC1E6A992104623A002E9300 /* NSObject_Extension.swift in Sources */,
 				FC1EF5E82109BEFC000F00B2 /* NetworkClass.swift in Sources */,
 				FC1EF5EA2109BFC8000F00B2 /* Reachability.swift in Sources */,
-				FC1E6A8921046105002E9300 /* ViewController.swift in Sources */,
+				FC1E6A8921046105002E9300 /* GameViewController.swift in Sources */,
+				FC6C3008210B896F006CD581 /* UIColorExtension.swift in Sources */,
+				FC1D0670210B79A500164967 /* UIViewControllerExtension.swift in Sources */,
 				FC1D4D162108E81300E3FCFA /* SequenceExtension.swift in Sources */,
 				FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */,
 				FC34D4E32109CB2400A5E9A1 /* APIKeys.swift in Sources */,
+				FC1D0674210B822700164967 /* EndGameViewController.swift in Sources */,
 				FC1E6A9021046105002E9300 /* AppDelegate.swift in Sources */,
 				FC1E6A932104614F002E9300 /* Option.swift in Sources */,
 				FC1E6A8D21046105002E9300 /* HeaderImageTableViewCell.swift in Sources */,
 				FC1E6A952104621B002E9300 /* ArticleParser.swift in Sources */,
 				FC34D4E92109E3D300A5E9A1 /* WikiArticle.swift in Sources */,
 				FC34D4E72109DAE400A5E9A1 /* StringExtension.swift in Sources */,
+				FC1D0672210B7BAA00164967 /* UIStoryboardExtension.swift in Sources */,
 				FC1B45BE210A311500DD6323 /* LandingViewController.swift in Sources */,
 				FC1E6A9721046233002E9300 /* Constants.swift in Sources */,
 			);
