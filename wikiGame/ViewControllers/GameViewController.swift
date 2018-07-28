@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var gameTableView: UITableView!
     var wikiArticle: WikiArticle?
     
-    let picker = CZPickerView(headerTitle: "Options", cancelButtonTitle: "Cancel", confirmButtonTitle: "OK")
+    let picker = CZPickerView(headerTitle: Constants.options, cancelButtonTitle: Constants.cancel, confirmButtonTitle: Constants.ok)
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -43,12 +43,16 @@ extension GameViewController {
     
     func setupView() {
         
-        setNavigationBarWithTitle(title: "wiki Game", LeftButtonType: .none, RightButtonType: .done)
+        //Navigation title
+        setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .none, RightButtonType: .done)
         
+        //Cell registration
         gameTableView.register(UINib(nibName: IntroParaTableViewCell.className(), bundle: nil), forCellReuseIdentifier: IntroParaTableViewCell.className())
         
         gameTableView.register(UINib(nibName: HeaderImageTableViewCell.className(), bundle: nil), forCellReuseIdentifier: HeaderImageTableViewCell.className())
         
+        
+        //Picker view configuration
         picker?.delegate = self
         picker?.dataSource = self
         picker?.needFooterView = true
@@ -61,6 +65,7 @@ extension GameViewController {
     
 }
 
+//MARK:- TableView datasource
 extension GameViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let _ = wikiArticle{
@@ -71,7 +76,6 @@ extension GameViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        return UITableViewCell()
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: HeaderImageTableViewCell.className()) as? HeaderImageTableViewCell
@@ -94,7 +98,7 @@ extension GameViewController: UITableViewDataSource {
     
 }
 
-
+//MARK:- Table view Delegate
 extension GameViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,9 +107,10 @@ extension GameViewController: UITableViewDelegate {
     
 }
 
-
+//MARK:- TextfieldURLInteractionDelegate
 extension GameViewController: TextfieldURLInteractionDelegate{
     func interacted(with url: URL, range: NSRange) {
+        //Get the line number and index of word seperated by -
         let indexes = url.absoluteString.components(separatedBy: "-")
         if indexes.count > 1{
             var lineNumber: Int?
@@ -119,19 +124,22 @@ extension GameViewController: TextfieldURLInteractionDelegate{
                 }
             }
             
-            
+            //Create temporary option to store users selected index and line number
             if let lineNumber = lineNumber, let wordIndex = wordIndex{
                 wikiArticle?.tempOption = Option(index: wordIndex, value: Constants.blankString, line: lineNumber)
             }
             
             
+            //Find previous selected word at this position to show the marked value on picker
             
-            if let option = wikiArticle?.tempOption, let userSelectedOption = wikiArticle?.userSelectedOptions, let selectedOption = userSelectedOption.index(of: option), let index = wikiArticle?.correctOptions.index(where: {$0.value == userSelectedOption[Int(selectedOption)].value}) {
+            if let option = wikiArticle?.tempOption,/*checking for nil*/
+                let userSelectedOption = wikiArticle?.userSelectedOptions,/*checking for nil*/
+                let selectedOption = userSelectedOption.index(of: option),/*Previous selected option for this index*/
+                let index = wikiArticle?.correctOptions.index(where: {$0.value == userSelectedOption[Int(selectedOption)].value})/*Finding the index of selected value in picker list*/ {
                 picker?.setSelectedRows([Int(index)])
             }else{
                 picker?.unselectAll()
             }
-            
             
             
             picker?.show()
@@ -141,6 +149,7 @@ extension GameViewController: TextfieldURLInteractionDelegate{
     
 }
 
+//MARK:- Picker delegate
 extension GameViewController: CZPickerViewDataSource{
     func numberOfRows(in pickerView: CZPickerView!) -> Int {
         return wikiArticle?.correctOptions.count ?? 0
@@ -155,12 +164,14 @@ extension GameViewController: CZPickerViewDelegate{
     
     func czpickerView(_ pickerView: CZPickerView!, didConfirmWithItemAtRow row: Int) {
         
+        //Creating user selected option and put in text
         if let option = wikiArticle?.correctOptions[row], let lineNumber = wikiArticle?.tempOption?.line, let wordIndex = wikiArticle?.tempOption?.index{
             let selectedOption = Option(index: wordIndex, value: option.value, line: lineNumber)
-            wikiArticle?.resetTextView(option: selectedOption)
             
+            wikiArticle?.userSelected(option: selectedOption)
             DispatchQueue.main.async {[weak self] in
                 if let cell = self?.gameTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? IntroParaTableViewCell{
+                    //Configuring cell with updated Text
                     cell.configure(text: self?.wikiArticle?.attributedText)
                 }
             }
@@ -171,6 +182,7 @@ extension GameViewController: CZPickerViewDelegate{
     
 }
 
+//MARK:- Right Nav button action
 extension GameViewController {
     
     override func rightButtonAction(sender: UIButton) {
@@ -184,8 +196,10 @@ extension GameViewController {
     
 }
 
+
+//MARK:- RefreshTableContentDelegate
 extension GameViewController: RefreshTableContentDelegate{
-    
+    //To refresh table with new article
     func refresh(article: WikiArticle?) {
         self.wikiArticle = article
         self.gameTableView.setContentOffset(.zero, animated: false)

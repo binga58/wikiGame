@@ -50,6 +50,7 @@
 	<array>
 		<string>SF-UI-Display-Light.otf</string>
 		<string>SF-UI-Display-Semibold.otf</string>
+        <string>LinLibertine_RZ.ttf</string>
 	</array>
 </dict>
 </plist>

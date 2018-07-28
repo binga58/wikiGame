@@ -27,7 +27,6 @@
 		FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A8021046105002E9300 /* IntroParaTableViewCell.swift */; };
 		FC1E6A8F21046105002E9300 /* IntroParaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A8121046105002E9300 /* IntroParaTableViewCell.xib */; };
 		FC1E6A9021046105002E9300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A8321046105002E9300 /* AppDelegate.swift */; };
-		FC1E6A9121046105002E9300 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A8421046105002E9300 /* Info.plist */; };
 		FC1E6A932104614F002E9300 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A922104614F002E9300 /* Option.swift */; };
 		FC1E6A952104621B002E9300 /* ArticleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A942104621B002E9300 /* ArticleParser.swift */; };
 		FC1E6A9721046233002E9300 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1E6A9621046233002E9300 /* Constants.swift */; };
@@ -448,7 +447,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC1E6AAD21048D68002E9300 /* SF-UI-Display-Light.otf in Resources */,
-				FC1E6A9121046105002E9300 /* Info.plist in Resources */,
 				FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */,
 				FC1E6A8C21046105002E9300 /* HeaderImageTableViewCell.xib in Resources */,
 				FC1B45BA210A2BF400DD6323 /* SF-UI-Display-Semibold.otf in Resources */,

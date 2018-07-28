@@ -22,6 +22,7 @@ class ArticleParser: NSObject {
     }
     var articleList: [Article] = []
     
+    //Request random article
     func requestWikiArticle(completion: @escaping WikiArticleCompletion) {
         
         self.completion = completion
@@ -29,6 +30,7 @@ class ArticleParser: NSObject {
         
     }
     
+    //Create url for finding most read articles on a random date
     private func mostReadArticleURL() -> String {
         
         let dateFormatter = DateFormatter()
@@ -42,7 +44,8 @@ class ArticleParser: NSObject {
         return urlString
     }
     
-    func wikiTitleURL(title: String) -> String {
+    //Create URL for getting data for wiki article
+    private func wikiTitleURL(title: String) -> String {
         
         let parameters: [String:String] = [
             "action": "mobileview",
@@ -67,17 +70,21 @@ class ArticleParser: NSObject {
     
     private func searchRandomTitle() {
         
+        //Select random article from previous fetched data
         if self.articleList.count > 0{
             
             self.getRandomTitle()
             
         } else{
-            
+            //Fetch most read articles
             NetworkClass.sendRequest(url: mostReadArticleURL(),incluedBaseURl: false, requestType: .get, parameters: nil) {[weak self] (status, response, error, statusCode) in
                 
-                if status, let result = response as? Dictionary<String,AnyObject>, let items = (result[APIKey.items] as? Array<AnyObject>)?.first as? Dictionary<String,AnyObject>, let articles = items[APIKey.articles] as? Array<Dictionary<String,AnyObject>>{
+                //Response parsing
+                if status, let result = response as? JSONDictionary, let items = (result[APIKey.items] as? Array<AnyObject>)?.first as? JSONDictionary, let articles = items[APIKey.articles] as? Array<JSONDictionary>{
                     
                     self?.articleList = []
+                    
+                    //Converting data and parsing to article object
                     for articleDict in articles{
                         
                         if let name = articleDict[APIKey.article] as? String, let rank = articleDict[APIKey.rank] as? Int, name != APIKey.mainPage, name != APIKey.specialSearch{
@@ -86,6 +93,7 @@ class ArticleParser: NSObject {
                         }
                         
                     }
+                    
                     
                     if (self?.articleList.count ?? 0) > 0 {
                         self?.getRandomTitle()
@@ -105,18 +113,19 @@ class ArticleParser: NSObject {
         
     }
     
-    func getRandomTitle() {
+    //Select random article
+    private func getRandomTitle() {
         
         let randomIndex = Int(arc4random_uniform(UInt32(ArticleParser.shared.articleList.count)))
         
         ArticleParser.shared.requestArticle(title: ArticleParser.shared.articleList[randomIndex].name)
-//        ArticleParser.shared.requestArticle(title: "Ben Affleck")
 
         
         ArticleParser.shared.articleList.remove(at: randomIndex)
         
     }
     
+    //Request for article with random title
     private func requestArticle(title: String) -> Void {
         
         NetworkClass.sendRequest(url: wikiTitleURL(title: title), incluedBaseURl: false, requestType: .get, parameters: nil) { [weak self] (status, response, error, statusCode) in
@@ -128,16 +137,6 @@ class ArticleParser: NSObject {
                 self?.completion?(nil, false)
             }
         }
-    }
-    
-    func substringToLastFullStop(text1: String) -> String {
-        var text = text1
-        if let range = text.range(of: ".", options: .backwards, range: nil, locale: nil){
-            
-            text = String(text.prefix(upTo: range.lowerBound)) + "."
-            
-        }
-        return text
     }
     
 

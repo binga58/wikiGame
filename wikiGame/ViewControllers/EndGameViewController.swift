@@ -16,6 +16,7 @@ protocol RefreshTableContentDelegate: class {
 class EndGameViewController: UIViewController {
     
     var pointScored: Int?
+    //View states
     var viewState: ViewState = .normal{
         
         didSet{
@@ -33,7 +34,7 @@ class EndGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setViewState()
+        viewState = .normal
         // Do any additional setup after loading the view.
     }
 
@@ -44,6 +45,7 @@ class EndGameViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        //To reconfigure the animation to button centre
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {[weak self] in
             self?.animationView.frame = (self?.refreshBTN.frame)!
             self?.animationView.center = (self?.refreshBTN.center)!

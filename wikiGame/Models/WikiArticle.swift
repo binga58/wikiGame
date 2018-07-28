@@ -35,16 +35,20 @@ class WikiArticle {
 
 extension WikiArticle{
     
+    
     public convenience init?(dict: JSONDictionary) {
         guard let mobileview = dict[APIKey.mobileView] as? JSONDictionary,
             let sections = mobileview[APIKey.sections] as? [JSONDictionary],
-        let title = mobileview[APIKey.displaytitle] as? String
+            let title = mobileview[APIKey.displaytitle] as? String
             else {
                 return nil
         }
+        
+        //Initializing WikiArticle
         self.init(title: title)
         
         do{
+            //removing tags from article like <i>
             let text = try SwiftSoup.parse(title).text()
             
             self.title = text
@@ -53,6 +57,7 @@ extension WikiArticle{
             print(error)
         }
         
+        //Image URL
         if let thumbProperties = mobileview[APIKey.thumb] as? JSONDictionary,
             let imageURLString = thumbProperties[APIKey.url] as? String,
             var imageURL = URL(string: imageURLString) {
@@ -64,18 +69,22 @@ extension WikiArticle{
             self.imageURL = imageURL
         }
         
+        //Article description
         if let description = mobileview[APIKey.description] as? String{
             self.description = description
         }
         
+        //Parsing through sections
         for para in sections{
-        
+            
             if let body = para[APIKey.text] as? String, let id = para[APIKey.id] as? Int{
                 
-                
+                //For Introductory para
                 if id == 0{
                     
                     do{
+                        //Removing tags and getting only displayed Text
+                        //Regex to remove numbers like [21]
                         let text = try SwiftSoup.parse(body).text().replacingOccurrences(of: "\\[\\d+\\]", with: "", options: .regularExpression, range: nil)
                         
                         self.body += text
@@ -89,10 +98,11 @@ extension WikiArticle{
                     }catch {
                         print(error)
                     }
-
+                    
                     
                 }else {
-                    
+                    //For further para
+                    //Not much tested
                     if let tocLevel = para[APIKey.toclevel] as? Int{
                         
                         if tocLevel == 2{
@@ -115,7 +125,7 @@ extension WikiArticle{
                                 }catch {
                                     print(error)
                                 }
-
+                                
                                 
                             }
                             
@@ -131,7 +141,7 @@ extension WikiArticle{
             }
             
         }
-    
+        
         
     }
     
@@ -142,74 +152,80 @@ extension WikiArticle{
     
     func createMissingWords() {
         
-            let paraText:NSMutableAttributedString = NSMutableAttributedString.init(string: "")
-            let strArray = self.body.components(separatedBy: ".").filter { (line) -> Bool in
-                return line.count > 1
-            }
+        
+        let paraText:NSMutableAttributedString = NSMutableAttributedString.init(string: "")
+        
+        //Seperating by lines
+        let strArray = self.body.components(separatedBy: ".").filter { (line) -> Bool in
+            return line.count > 1
+        }
+        
+        for (lineNumber, line) in strArray.enumerated(){
             
-            for (lineNumber, line) in strArray.enumerated(){
+            //Missing words for first ten lines
+            if lineNumber < Constants.minimumLines {
                 
-                
-                if lineNumber < Constants.minimumLines {
-                    
-                    let words = line.trimmingCharacters(in: .whitespaces).components(separatedBy: " ").compactMap { (oldValue) -> String? in
-                        return oldValue.replacingOccurrences(of: " ", with: "")
-                    }
-                    
-                    let count = UInt32(words.count)
-                    let randomIndex = Int(arc4random_uniform(count))
-                    
-                    let lineTextNSMutableAttributedString = NSMutableAttributedString.init(string: "")
-                    
-                    for (index, word) in words.enumerated() {
-                        
-                        if word.count > 0{
-                            if index == randomIndex{
-                                
-                                let option = Option(index: index, value: word, line: lineNumber)
-                                
-                                lineTextNSMutableAttributedString.append(NSAttributedString(string: Constants.blankString + (index == words.count - 1 ? "" : " ")))
-                                
-                                lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - Constants.blankString.count - (index == words.count - 1 ? 0 : 1), length: Constants.blankString.count))
-                                
-                                
-                                
-                                correctOptions.append(option)
-                                
-                                
-                                
-                            }else{
-                                
-                                lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
-                                
-                            }
-                        }
-                    }
-                    
-                    paraText.append(lineTextNSMutableAttributedString)
-                    
-                } else{
-                    
-                    paraText.append(NSAttributedString(string: line))
-                    
+                //Seperating by whitespace
+                let words = line.trimmingCharacters(in: .whitespaces).components(separatedBy: " ").compactMap { (oldValue) -> String? in
+                    return oldValue.replacingOccurrences(of: " ", with: "")
                 }
                 
-                paraText.append(NSAttributedString(string: "."))
+                let count = UInt32(words.count)
+                let randomIndex = Int(arc4random_uniform(count))
                 
+                let lineTextNSMutableAttributedString = NSMutableAttributedString.init(string: "")
+                
+                //For enumerating the words
+                for (index, word) in words.enumerated() {
+                    
+                    if word.count > 0{
+                        //Replacing random word with blank string
+                        if index == randomIndex{
+                            
+                            let option = Option(index: index, value: word, line: lineNumber)
+                            
+                            lineTextNSMutableAttributedString.append(NSAttributedString(string: Constants.blankString + (index == words.count - 1 ? "" : " ")))
+                            
+                            lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - Constants.blankString.count - (index == words.count - 1 ? 0 : 1), length: Constants.blankString.count))
+                            
+                            
+                            
+                            correctOptions.append(option)
+                            
+                            
+                            
+                        }else{
+                            
+                            lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
+                            
+                        }
+                    }
+                }
+                
+                paraText.append(lineTextNSMutableAttributedString)
+                
+            } else{
+                
+                paraText.append(NSAttributedString(string: line))
                 
             }
             
-            paraText.addAttributes(fontTextAttributes, range: NSMakeRange(0, paraText.length))
+            paraText.append(NSAttributedString(string: "."))
             
-            correctOptions.shuffle()
-        
-            self.attributedText = paraText
             
         }
+        
+        paraText.addAttributes(fontTextAttributes, range: NSMakeRange(0, paraText.length))
+        
+        correctOptions.shuffle()
+        
+        self.attributedText = paraText
+        
+    }
     
     
     
-    func resetTextView(option:Option){
+    func userSelected(option:Option){
         
         if let strTest = self.attributedText?.string{
             
@@ -231,13 +247,14 @@ extension WikiArticle{
                         
                         if correctOptions.contains(Option(index: index, value: word, line: lineNumber)) {
                             
+                            //Replacing with user selected word and converting them to link
                             if index == option.index && lineNumber == option.line{
                                 
                                 lineTextNSMutableAttributedString.append(NSAttributedString(string: option.value + (index == words.count - 1 ? "" : " ")))
                                 
                                 lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - option.value.count - (index == words.count - 1 ? 0 : 1), length: option.value.count))
                             }else {
-                                
+                                //Converting missed words to links
                                 lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
                                 
                                 lineTextNSMutableAttributedString.addAttribute(.link, value: "\(lineNumber)-\(index)", range: NSRange(location: lineTextNSMutableAttributedString.length - word.count - (index == words.count - 1 ? 0 : 1), length: word.count))
@@ -274,7 +291,7 @@ extension WikiArticle{
         }
     }
     
-    
+    //User score
     func findUserScore() -> Int {
         correctOptions.sort { (option1, option2) -> Bool in
             return option1.line < option2.line
@@ -290,7 +307,7 @@ extension WikiArticle{
             
             let correctOption = correctOptions[index]
             
-            if correctOption.value == option.value{
+            if correctOption.value.lowercased() == option.value.lowercased(){
                 points += 1
             }
             
@@ -301,3 +318,4 @@ extension WikiArticle{
     
     
 }
+

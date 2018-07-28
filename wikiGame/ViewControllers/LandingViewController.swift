@@ -21,6 +21,8 @@ class LandingViewController: UIViewController {
     let animationView: LOTAnimationView = LOTAnimationView(name: "animation-w400-h300.json")
     
     @IBOutlet weak var playBTN: UIButton!
+    
+    //Three states of views are maintained.
     var viewState: ViewState = .normal{
         
         didSet{
@@ -31,7 +33,7 @@ class LandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        viewState = .normal
         
         // Do any additional setup after loading the view.
     }
@@ -41,8 +43,10 @@ class LandingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        //To reconfigure the animation to button centre
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {[weak self] in
             self?.animationView.frame = (self?.playBTN.frame)!
             self?.animationView.center = (self?.playBTN.center)!
@@ -50,18 +54,22 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction func playBtnAction(_ sender: Any) {
+        
         viewState = .searching
+        
+        //Request for wiki Article
         ArticleParser.shared.requestWikiArticle { (article, success) in
             if success{
+                
+                //Present game controller
                 DispatchQueue.main.async {[weak self] in
-                    self?.viewState = .normal
                     
                     let gameViewController = UIStoryboard.init(storyboard: .main).instantiateViewController(withIdentifier: GameViewController.className()) as? GameViewController ?? GameViewController()
                     gameViewController.wikiArticle = article
                     let navController = UINavigationController(rootViewController: gameViewController)
                     
                     self?.present(navController, animated: true, completion: nil)
-                    
+                    self?.viewState = .normal
                     
                 }
             } else {
@@ -73,7 +81,7 @@ class LandingViewController: UIViewController {
     }
     
     
-    
+    //Configurung view based on view state
     func setupView() {
         
         switch viewState {

@@ -20,5 +20,13 @@ struct Constants {
     
     static let done = "Done"
     
+    static let options = "Options"
+    
+    static let cancel = "Cancel"
+    
+    static let ok = "OK"
+    
+    static let wikiGame = "wiki Game"
+    
 }
 
