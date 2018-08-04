@@ -66,6 +66,7 @@ class LandingViewController: UIViewController {
                     
                     let gameViewController = UIStoryboard.init(storyboard: .main).instantiateViewController(withIdentifier: GameViewController.className()) as? GameViewController ?? GameViewController()
                     gameViewController.wikiArticle = article
+                    gameViewController.gameControllerState = .game
                     let navController = UINavigationController(rootViewController: gameViewController)
                     
                     self?.present(navController, animated: true, completion: nil)

@@ -19,7 +19,7 @@ enum BarButtonPosition
 
 enum BarButtontype : Int
 {
-    case none = 1,done
+    case none = 1,done, back
     
     
     
@@ -28,6 +28,8 @@ enum BarButtontype : Int
         switch self {
         case .done:
             return Constants.done as AnyObject
+        case .back:
+            return "Back" as AnyObject
         default:
             return "" as AnyObject
         }
@@ -103,6 +105,7 @@ extension UIViewController
                 //for image
                 if let image = type.typeData() as? UIImage{
                     barButton = UIBarButtonItem(customView: getButtonWithImage(image: image , type: type , position:  position))
+                    barButton?.tintColor = UIColor.theme
                 }
                 
                 //for text and touple

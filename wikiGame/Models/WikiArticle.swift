@@ -16,10 +16,13 @@ class WikiArticle {
     public var imageURL: URL?
     public var description: String?
     public var attributedText: NSMutableAttributedString?
+    public var resultAttributedText: NSMutableAttributedString?
     public var correctOptions: [Option]
     public var userSelectedOptions: [Option]
     public var tempOption: Option?
     let fontTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkText, NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 17.0)!]
+    
+    let resultTextAttributes = [NSAttributedStringKey.font: UIFont(name: "SFUIDisplay-Light", size: 17.0)!]
     
     public init(title: String) {
         
@@ -291,6 +294,63 @@ extension WikiArticle{
         }
     }
     
+    func createResult() {
+        
+        if let strTest = self.attributedText?.string{
+            
+            let paraText:NSMutableAttributedString = NSMutableAttributedString.init(string: "")
+            let strArray = strTest.components(separatedBy: ".").filter { (line) -> Bool in
+                return line.count > 0
+            }
+            
+            for (lineNumber, line) in strArray.enumerated(){
+                
+                if lineNumber < Constants.minimumLines {
+                    
+                    let words = line.components(separatedBy: " ")
+                    
+                    let lineTextNSMutableAttributedString = NSMutableAttributedString.init(string: "")
+                    
+                    for (index, word) in words.enumerated(){
+                        
+                        
+                        if let option = correctOptions.filter({ $0.index == index && $0.line == lineNumber }).first {
+                            
+                            
+                            lineTextNSMutableAttributedString.append(NSAttributedString(string: option.value + (index == words.count - 1 ? "" : " ")))
+                            let attr = [NSAttributedStringKey.foregroundColor: option.isMarkedCorrect ? UIColor.correct : UIColor.wrong]
+                            lineTextNSMutableAttributedString.addAttributes(attr, range: NSRange(location: lineTextNSMutableAttributedString.length - option.value.count - (index == words.count - 1 ? 0 : 1), length: option.value.count))
+                            
+                            
+                        } else {
+                            
+                            lineTextNSMutableAttributedString.append(NSAttributedString(string: word + (index == words.count - 1 ? "" : " ")))
+                            
+                        }
+                        
+                    }
+                    
+                    paraText.append(lineTextNSMutableAttributedString)
+                    
+                } else{
+                    
+                    paraText.append(NSAttributedString(string: line))
+                    
+                }
+                
+                paraText.append(NSAttributedString(string: "."))
+                
+            }
+            
+            paraText.addAttributes(resultTextAttributes, range: NSMakeRange(0, paraText.length))
+            
+            self.resultAttributedText = paraText
+            
+        }
+        
+    }
+    
+    
     //User score
     func findUserScore() -> Int {
         correctOptions.sort { (option1, option2) -> Bool in
@@ -305,13 +365,17 @@ extension WikiArticle{
         
         for (index, option) in userSelectedOptions.enumerated(){
             
-            let correctOption = correctOptions[index]
+            var correctOption = correctOptions[index]
             
             if correctOption.value.lowercased() == option.value.lowercased(){
                 points += 1
+                correctOption.markOptionCorrect()
+                correctOptions[index] = correctOption
             }
             
         }
+        
+        createResult()
         
         return points
     }

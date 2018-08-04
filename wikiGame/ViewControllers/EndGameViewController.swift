@@ -10,12 +10,13 @@ import UIKit
 import Lottie
 
 protocol RefreshTableContentDelegate: class {
-    func refresh(article: WikiArticle?)
+    func refresh(article: WikiArticle?, gameState: GameControllerState)
 }
 
 class EndGameViewController: UIViewController {
     
     var pointScored: Int?
+    var wikiArticle: WikiArticle?
     //View states
     var viewState: ViewState = .normal{
         
@@ -27,6 +28,7 @@ class EndGameViewController: UIViewController {
     weak var delegate: RefreshTableContentDelegate?
     let animationView: LOTAnimationView = LOTAnimationView(name: "animation-w400-h300.json")
     
+    @IBOutlet weak var resultBTN: UIButton!
     @IBOutlet weak var pointsLBL: UILabel!
     @IBOutlet weak var refreshBTN: UIButton!
     @IBOutlet weak var errorLBL: UILabel!
@@ -35,9 +37,17 @@ class EndGameViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         viewState = .normal
+        
+        resultBTN.isHidden = pointScored == 10 ? true : false
+        
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,7 +104,7 @@ class EndGameViewController: UIViewController {
             if success {
                 
                 DispatchQueue.main.async {
-                    self?.delegate?.refresh(article: article)
+                    self?.delegate?.refresh(article: article, gameState: .game)
                     self?.navigationController?.popViewController(animated: true)
                     self?.viewState = .normal
                 }
@@ -109,5 +119,16 @@ class EndGameViewController: UIViewController {
     }
     
     
-
+    @IBAction func resultBTNAction(_ sender: Any) {
+        
+        let gameViewController = UIStoryboard.init(storyboard: .main).instantiateViewController(withIdentifier: GameViewController.className()) as? GameViewController ?? GameViewController()
+        gameViewController.wikiArticle = wikiArticle
+        gameViewController.gameControllerState = .result
+        
+        self.navigationController?.pushViewController(gameViewController, animated: true)
+        
+    }
+    
 }
+
+

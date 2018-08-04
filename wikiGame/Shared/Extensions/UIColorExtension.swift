@@ -19,4 +19,12 @@ extension UIColor{
         return UIColor.getColorFromHexValue(hexValue: 0x47A8EF, Alpha: 1.0)
     }()
     
+    static let correct:UIColor = {
+        return UIColor.getColorFromHexValue(hexValue: 0x428C2A, Alpha: 1.0)
+    }()
+    
+    static let wrong:UIColor = {
+        UIColor.red
+    }()
+    
 }

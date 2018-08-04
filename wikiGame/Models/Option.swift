@@ -12,6 +12,7 @@ struct Option:Hashable{
     var index:Int
     var value:String
     var line:Int
+    var isMarkedCorrect: Bool = false
     
     init(index:Int,value:String,line:Int) {
         self.index = index
@@ -25,6 +26,10 @@ struct Option:Hashable{
     
     static func == (lhs: Option, rhs: Option) -> Bool {
         return (lhs.line == rhs.line && lhs.index == rhs.index)
+    }
+    
+    mutating func markOptionCorrect() {
+        self.isMarkedCorrect = true
     }
     
 }

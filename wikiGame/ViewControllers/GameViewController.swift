@@ -10,10 +10,15 @@ import UIKit
 import SwiftSoup
 import CZPicker
 
+enum GameControllerState {
+    case game, result
+}
+
 class GameViewController: UIViewController {
     var heightDict: Dictionary<IndexPath,CGFloat> = [:]
     @IBOutlet weak var gameTableView: UITableView!
     var wikiArticle: WikiArticle?
+    var gameControllerState: GameControllerState!
     
     let picker = CZPickerView(headerTitle: Constants.options, cancelButtonTitle: Constants.cancel, confirmButtonTitle: Constants.ok)
     override func viewDidLoad() {
@@ -43,8 +48,30 @@ extension GameViewController {
     
     func setupView() {
         
-        //Navigation title
-        setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .none, RightButtonType: .done)
+        switch gameControllerState {
+        case .game:
+            print("game")
+            //Navigation title
+            setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .none, RightButtonType: .done)
+            
+            //Picker view configuration
+            picker?.delegate = self
+            picker?.dataSource = self
+            picker?.needFooterView = true
+            picker?.headerBackgroundColor = UIColor.white
+            picker?.headerTitleColor = UIColor.black
+            picker?.confirmButtonBackgroundColor = UIColor.theme
+            
+            
+        case .result:
+            print("result")
+            //Navigation title
+            setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .back, RightButtonType: .none)
+        default:
+            print("default")
+        }
+        
+        
         
         //Cell registration
         gameTableView.register(UINib(nibName: IntroParaTableViewCell.className(), bundle: nil), forCellReuseIdentifier: IntroParaTableViewCell.className())
@@ -52,13 +79,7 @@ extension GameViewController {
         gameTableView.register(UINib(nibName: HeaderImageTableViewCell.className(), bundle: nil), forCellReuseIdentifier: HeaderImageTableViewCell.className())
         
         
-        //Picker view configuration
-        picker?.delegate = self
-        picker?.dataSource = self
-        picker?.needFooterView = true
-        picker?.headerBackgroundColor = UIColor.white
-        picker?.headerTitleColor = UIColor.black
-        picker?.confirmButtonBackgroundColor = UIColor.theme
+        
         
         
     }
@@ -87,10 +108,22 @@ extension GameViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: IntroParaTableViewCell.className()) as? IntroParaTableViewCell
             
-            if let _ = wikiArticle?.attributedText{
-                cell?.configure(text: wikiArticle?.attributedText)
+            switch gameControllerState {
+            case .result:
+                if let _ = wikiArticle?.resultAttributedText{
+                    cell?.configure(text: wikiArticle?.resultAttributedText)
+                    
+                }
+            case .game:
+                if let _ = wikiArticle?.attributedText{
+                    cell?.configure(text: wikiArticle?.attributedText)
+                    
+                }
+            default:
+                break
                 
             }
+            
             cell?.delegate = self
             return cell ?? IntroParaTableViewCell()
         }
@@ -190,8 +223,13 @@ extension GameViewController {
         let endGameViewController = UIStoryboard(storyboard: .main).instantiateViewController(withIdentifier: EndGameViewController.className()) as? EndGameViewController ?? EndGameViewController()
         endGameViewController.pointScored = wikiArticle?.findUserScore()
         endGameViewController.delegate = self
+        endGameViewController.wikiArticle = self.wikiArticle
         self.navigationController?.pushViewController(endGameViewController, animated: true)
         
+    }
+    
+    override func leftButtonAction(sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -200,8 +238,9 @@ extension GameViewController {
 //MARK:- RefreshTableContentDelegate
 extension GameViewController: RefreshTableContentDelegate{
     //To refresh table with new article
-    func refresh(article: WikiArticle?) {
+    func refresh(article: WikiArticle?, gameState: GameControllerState) {
         self.wikiArticle = article
+        self.gameControllerState = gameState
         self.gameTableView.setContentOffset(.zero, animated: false)
         self.gameTableView.reloadData()
     }
