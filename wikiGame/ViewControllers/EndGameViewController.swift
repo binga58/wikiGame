@@ -10,11 +10,12 @@ import UIKit
 import Lottie
 
 protocol RefreshTableContentDelegate: class {
-    func refresh(article: WikiArticle?, gameState: GameControllerState)
+    func refresh(article: WikiArticle?, gameState: GameControllerState, gameDifficulty: GameDifficulty)
 }
 
 class EndGameViewController: UIViewController {
     
+    @IBOutlet weak var difficultySwitch: UISwitch!
     var pointScored: Int?
     var wikiArticle: WikiArticle?
     //View states
@@ -104,7 +105,8 @@ class EndGameViewController: UIViewController {
             if success {
                 
                 DispatchQueue.main.async {
-                    self?.delegate?.refresh(article: article, gameState: .game)
+                    let gameDifficulty: GameDifficulty = (self?.difficultySwitch.isOn ?? false) ? .hard : .easy
+                    self?.delegate?.refresh(article: article, gameState: .game, gameDifficulty: gameDifficulty)
                     self?.navigationController?.popViewController(animated: true)
                     self?.viewState = .normal
                 }

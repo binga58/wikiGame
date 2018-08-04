@@ -28,5 +28,7 @@ struct Constants {
     
     static let wikiGame = "wiki Game"
     
+    static let gameDifficultyTime = 60
+    
 }
 

@@ -9,16 +9,26 @@
 import UIKit
 import SwiftSoup
 import CZPicker
+import Lottie
+
+enum GameDifficulty {
+    case easy, hard
+}
 
 enum GameControllerState {
     case game, result
 }
 
 class GameViewController: UIViewController {
-    var heightDict: Dictionary<IndexPath,CGFloat> = [:]
+    
+    
     @IBOutlet weak var gameTableView: UITableView!
     var wikiArticle: WikiArticle?
     var gameControllerState: GameControllerState!
+    var time = Constants.gameDifficultyTime
+    var gameTimer: Timer?
+    var gameDifficulty: GameDifficulty = .easy
+    let timerView: TimerView = TimerView.getInstance()
     
     let picker = CZPickerView(headerTitle: Constants.options, cancelButtonTitle: Constants.cancel, confirmButtonTitle: Constants.ok)
     override func viewDidLoad() {
@@ -41,6 +51,11 @@ class GameViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupTimer()
+    }
+    
 }
 
 //MARK:- UI Helper
@@ -48,11 +63,18 @@ extension GameViewController {
     
     func setupView() {
         
+        
         switch gameControllerState {
         case .game:
-            print("game")
-            //Navigation title
-            setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .none, RightButtonType: .done)
+            
+            switch gameDifficulty {
+            case .hard:
+                //Navigation title
+                setNavigationBarWithTitle(titleView: timerView, LeftButtonType: [.none], RightButtonType: [.done])
+                timerView.displayLBL.text = "\(time)"
+            case .easy:
+                setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .none, RightButtonType: .done)
+            }
             
             //Picker view configuration
             picker?.delegate = self
@@ -64,11 +86,11 @@ extension GameViewController {
             
             
         case .result:
-            print("result")
+            
             //Navigation title
             setNavigationBarWithTitle(title: Constants.wikiGame, LeftButtonType: .back, RightButtonType: .none)
         default:
-            print("default")
+            break
         }
         
         
@@ -220,6 +242,11 @@ extension GameViewController {
     
     override func rightButtonAction(sender: UIButton) {
         
+        //stop timer
+        gameTimer?.invalidate()
+        gameTimer = nil
+        
+        
         let endGameViewController = UIStoryboard(storyboard: .main).instantiateViewController(withIdentifier: EndGameViewController.className()) as? EndGameViewController ?? EndGameViewController()
         endGameViewController.pointScored = wikiArticle?.findUserScore()
         endGameViewController.delegate = self
@@ -238,11 +265,37 @@ extension GameViewController {
 //MARK:- RefreshTableContentDelegate
 extension GameViewController: RefreshTableContentDelegate{
     //To refresh table with new article
-    func refresh(article: WikiArticle?, gameState: GameControllerState) {
+    func refresh(article: WikiArticle?, gameState: GameControllerState, gameDifficulty: GameDifficulty ) {
         self.wikiArticle = article
         self.gameControllerState = gameState
+        self.gameDifficulty = gameDifficulty
+        time = Constants.gameDifficultyTime
+        setupView()
         self.gameTableView.setContentOffset(.zero, animated: false)
         self.gameTableView.reloadData()
+    }
+    
+}
+
+//MARK:- Timer Action
+extension GameViewController {
+    
+    func setupTimer() {
+        if gameDifficulty == .hard {
+            gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func timerAction() {
+        
+        timerView.displayLBL.text = "\(time)"
+        time -= 1
+        if time == -1 {
+            
+            rightButtonAction(sender: UIButton())
+            
+        }
+        
     }
     
 }

@@ -32,6 +32,9 @@ class HeaderImageTableViewCell: UITableViewCell {
             displayImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "wikiLogo"), options: nil, progressBlock: nil) { (image, error, _, url) in
                 
             }
+        } else {
+            
+            displayImageView.image = #imageLiteral(resourceName: "wikiLogo")
         }
         
     }

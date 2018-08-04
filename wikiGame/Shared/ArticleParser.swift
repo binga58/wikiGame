@@ -119,6 +119,7 @@ class ArticleParser: NSObject {
         let randomIndex = Int(arc4random_uniform(UInt32(ArticleParser.shared.articleList.count)))
         
         ArticleParser.shared.requestArticle(title: ArticleParser.shared.articleList[randomIndex].name)
+//        ArticleParser.shared.requestArticle(title: "Raazi")
 
         
         ArticleParser.shared.articleList.remove(at: randomIndex)

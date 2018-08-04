@@ -18,6 +18,8 @@
 		FC1D0672210B7BAA00164967 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0671210B7BAA00164967 /* UIStoryboardExtension.swift */; };
 		FC1D0674210B822700164967 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0673210B822700164967 /* EndGameViewController.swift */; };
 		FC1D4D162108E81300E3FCFA /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */; };
+		FC1D6CDC21159BFC00F6E6A1 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D6CDB21159BFC00F6E6A1 /* TimerView.swift */; };
+		FC1D6CDE21159CFF00F6E6A1 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1D6CDD21159CFF00F6E6A1 /* TimerView.xib */; };
 		FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6C21046105002E9300 /* LaunchScreen.storyboard */; };
 		FC1E6A8621046105002E9300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A6D21046105002E9300 /* Main.storyboard */; };
 		FC1E6A8821046105002E9300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1E6A7121046105002E9300 /* Assets.xcassets */; };
@@ -77,6 +79,8 @@
 		FC1D0671210B7BAA00164967 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		FC1D0673210B822700164967 /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		FC1D4D152108E81300E3FCFA /* SequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtension.swift; sourceTree = "<group>"; };
+		FC1D6CDB21159BFC00F6E6A1 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		FC1D6CDD21159CFF00F6E6A1 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
 		FC1E6A6C21046105002E9300 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC1E6A6D21046105002E9300 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FC1E6A7121046105002E9300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,6 +160,15 @@
 				0C52E24145D43FB8DDC7BF78 /* Pods_wikiGameUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC1D6CDA21159BE300F6E6A1 /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				FC1D6CDB21159BFC00F6E6A1 /* TimerView.swift */,
+				FC1D6CDD21159CFF00F6E6A1 /* TimerView.xib */,
+			);
+			path = TimerView;
 			sourceTree = "<group>";
 		};
 		FC1E6A6A21046105002E9300 /* wikiGame */ = {
@@ -245,6 +258,7 @@
 		FC1E6A7621046105002E9300 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC1D6CDA21159BE300F6E6A1 /* TimerView */,
 				FC1B45BD210A311500DD6323 /* LandingViewController.swift */,
 				FC1E6A7721046105002E9300 /* GameViewController.swift */,
 				FC1D0673210B822700164967 /* EndGameViewController.swift */,
@@ -449,6 +463,7 @@
 				FC1E6AAD21048D68002E9300 /* SF-UI-Display-Light.otf in Resources */,
 				FC1E6A8521046105002E9300 /* LaunchScreen.storyboard in Resources */,
 				FC1E6A8C21046105002E9300 /* HeaderImageTableViewCell.xib in Resources */,
+				FC1D6CDE21159CFF00F6E6A1 /* TimerView.xib in Resources */,
 				FC1B45BA210A2BF400DD6323 /* SF-UI-Display-Semibold.otf in Resources */,
 				FC1E6A8F21046105002E9300 /* IntroParaTableViewCell.xib in Resources */,
 				FC1BC678210B69B00079C7FB /* animation-w400-h300.json in Resources */,
@@ -572,6 +587,7 @@
 				FC1E6A8E21046105002E9300 /* IntroParaTableViewCell.swift in Sources */,
 				FC34D4E32109CB2400A5E9A1 /* APIKeys.swift in Sources */,
 				FC1D0674210B822700164967 /* EndGameViewController.swift in Sources */,
+				FC1D6CDC21159BFC00F6E6A1 /* TimerView.swift in Sources */,
 				FC1E6A9021046105002E9300 /* AppDelegate.swift in Sources */,
 				FC1E6A932104614F002E9300 /* Option.swift in Sources */,
 				FC1E6A8D21046105002E9300 /* HeaderImageTableViewCell.swift in Sources */,

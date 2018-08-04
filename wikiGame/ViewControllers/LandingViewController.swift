@@ -17,6 +17,7 @@ class LandingViewController: UIViewController {
     
     @IBOutlet weak var backgroundView: UIView!
     
+    @IBOutlet weak var difficultySwitch: UISwitch!
     @IBOutlet weak var errorLBL: UILabel!
     let animationView: LOTAnimationView = LOTAnimationView(name: "animation-w400-h300.json")
     
@@ -67,6 +68,7 @@ class LandingViewController: UIViewController {
                     let gameViewController = UIStoryboard.init(storyboard: .main).instantiateViewController(withIdentifier: GameViewController.className()) as? GameViewController ?? GameViewController()
                     gameViewController.wikiArticle = article
                     gameViewController.gameControllerState = .game
+                    gameViewController.gameDifficulty = (self?.difficultySwitch.isOn ?? false) ? .hard : .easy
                     let navController = UINavigationController(rootViewController: gameViewController)
                     
                     self?.present(navController, animated: true, completion: nil)
